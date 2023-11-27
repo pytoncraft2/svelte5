@@ -1,0 +1,117 @@
+@use "./color" as clr;
+@use "./mixins" as mixins;
+
+// ici: resets utiles + par défaut
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family: "Open Sans", sans-serif;
+    background-color: clr.$neutre-900;
+    color: clr.$neutre-100;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+    --radius: .2em;
+    --space: 1rem;
+    --container-width: min(900px, 90%);
+
+    @include mixins.mobile-only {
+        --space: .5rem;
+    }
+}
+
+a,
+a:visited {
+    color: inherit;
+
+    &:hover {
+        text-decoration-style: dashed;
+    }
+}
+
+.container {
+    width: var(--container-width);
+    margin-inline: auto;
+}
+
+hr {
+    margin-block: 2em;
+    border: none;
+    border-top: 1px solid #999;
+}
+
+input, textarea, select, .bouton-style {
+    font: inherit;
+    
+    --color: #{clr.$primaire-500};
+    border: 1px solid var(--color);
+    background-color: white;
+
+    border-radius: var(--radius);
+
+    &:focus {
+        outline: 1px solid var(--color);
+    }
+}
+
+input[type="number"] {
+    text-align: center;
+}
+
+input[type="button"], button {
+    border-radius: var(--radius);
+}
+
+:is(button, a.button, .bouton) {
+    font: inherit;
+    border-radius: var(--radius);
+    padding: .3em .5em;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+        filter: brightness(70%);
+    }
+}
+
+:is(button, a.button, .bouton).filled {
+    background-color: clr.$primaire-500;
+    color: clr.$neutre-900;
+    border: none;
+}
+
+// cette classe est destinée aux champs (voir en haut)
+// mais dans certains cas, la bordure doit être appliqué aux parents
+// c'est pour ça qu'on ne peut pas être plus spécifique ici
+.incorrect {
+    --color: #{mix(clr.$error-text, black, 75%)};
+}
+
+.display-block {
+    display: block;
+}
+
+.message-erreur:not(:empty) {
+    color: clr.$error-text;
+    background-color: clr.$error-bg;
+    font-size: 0.9rem;
+    max-width: max-content;
+
+    padding: .5em;
+    margin-bottom: 1em;
+    border-radius: var(--radius);
+}
+
+.astuce {
+    font-size: 0.9rem;
+    color: #444;
+    margin: .5em 0;
+}

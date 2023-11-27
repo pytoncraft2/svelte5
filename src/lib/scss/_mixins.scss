@@ -1,0 +1,41 @@
+@use "./color" as clr;
+
+@mixin button {
+    display: block;
+    width: 100%;
+
+    border: 0;
+    background-color: clr.$primaire-500;
+    padding: .5em 1em;
+
+    font: inherit;
+    color: white;
+    text-align: center;
+
+    &:hover {
+        background-color: clr.$primaire-100;
+        cursor: pointer;
+    }
+
+    &:focus-visible {
+        outline: 2px solid clr.$primaire-500;
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        filter: grayscale(80%) brightness(100%);
+        pointer-events: none;
+    }
+}
+
+@mixin desktop-only {
+    @media screen and (min-width: 45em) {
+        @content;
+    }
+}
+
+@mixin mobile-only {
+    @media screen and (max-width: 44.999em) {
+        @content;
+    }
+}

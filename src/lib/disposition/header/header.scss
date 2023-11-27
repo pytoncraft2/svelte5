@@ -1,0 +1,95 @@
+@use "../../scss/color" as clr;
+@use "../../scss/mixins" as mixins;
+
+.header {
+    background: clr.$primaire-500;
+    color: clr.$neutre-900;
+
+    border-bottom: 2px solid clr.$primaire-100;
+}
+
+.header > .container {
+    display: flex;
+
+    &:first-child {
+        border-left: 1px solid clr.$neutre-900;
+    }
+
+    & > * {
+        border-right: 1px solid clr.$neutre-900;
+    }
+}
+
+.header__link {
+    text-decoration: none;
+
+    &:hover {
+        background-color: clr.$primaire-100;
+    }
+}
+
+.header__lts-home {
+    display: flex;
+    gap: var(--space);
+    align-items: center;
+    font-weight: bold;
+
+    padding: var(--space);
+
+    & > img {
+        width: 2.5rem;
+    }
+
+    @include mixins.mobile-only {
+        span { display: none }
+    }
+}
+
+.header__app-title {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space);
+    flex-grow: 1;
+
+
+    padding: var(--space);
+
+    font-size: clamp(1rem, 3vw, 1.3rem);
+
+    .header__app-logo {
+        width: 2rem;
+
+        @include mixins.mobile-only {
+            display: none;
+        }
+    }
+}
+
+.header__contact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space);
+
+    text-decoration: none;
+
+    padding: var(--space);
+
+    &-icon {
+        width: 1.5em;
+        fill: currentColor;
+
+
+        @include mixins.mobile-only {
+            display: none;
+        }
+    }
+}
+
+.presentation__paragraph {
+    // max-width: 60ch;
+    margin: calc(4 * var(--space)) 0;
+}

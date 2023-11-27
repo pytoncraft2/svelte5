@@ -1,0 +1,30 @@
+@use "./fonts.scss";
+@use "./reset.scss";
+
+main {
+    padding-block: calc(3 * var(--space));
+    position: relative;
+}
+
+
+form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    label {
+        color: hsl(200, 100%, 30%);
+        padding-bottom: 1%;
+    }
+
+
+    .required:after {
+        content:" *";
+        color: red;
+    }
+}
+
+#edition form {
+    input, textarea {
+        margin-bottom: 1em;
+    }
+}
