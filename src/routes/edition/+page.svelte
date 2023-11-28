@@ -5,6 +5,7 @@
     import Modal from "$lib/modal/Modal.svelte";
     import AjoutPassager from "./form/AjoutPassager.svelte";
     import AjoutVoiture from "./form/AjoutVoiture.svelte";
+    import Liste from "../../lib/liste/Liste.svelte";
 
     let id = $state();
     let infos = $state();
@@ -30,6 +31,10 @@
         modalData = data;
     }
 
+    function test() {
+        console.log("TEST OK");
+    }
+
 </script>
 
 {#if infos}
@@ -46,7 +51,8 @@
                         })}>Ajouter voiture {typeTrajet}</button>
         {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
             <h5>{v.nom}</h5>
-            {@render liste_participants(v[`passagers_${typeTrajet}`])}
+            <Liste items={v[`passagers_${typeTrajet}`]} {liste_participants} />
+            <!-- {@render liste_participants(v[`passagers_${typeTrajet}`])} -->
         {/each}        
     {/each}
 {/if}
@@ -55,11 +61,11 @@
 
 {#snippet liste_participants(items)}
     {#each items as item(item.id)}
-        <div role="button" tabindex="{item.id}">
-            <div class="objet-draggable">
+        <!-- <div role="button" tabindex="{item.id}" onclick={test}> -->
+            <!-- <div class="objet-draggable"> -->
                 <span>{item.nom || item.name}</span>
-            </div>
-        </div>
+            <!-- </div> -->
+        <!-- </div> -->
     {/each}
 {/snippet}
 
