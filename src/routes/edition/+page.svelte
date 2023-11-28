@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
     import { GET } from "$lib/utils";
@@ -11,58 +11,16 @@
         id = searchParams.get("url");
         if (id) {
             GET(`/api/evenement/${id}`)
-                .then((v) => {
-                    infos = v;
-                })
+                .then((v) => infos = v)
                 .catch((e) => console.log(e));
         } else {
             window.location.href = "/";
         }
-        console.log(id);
-        
 	})
 
 </script>
 
-{#snippet liste_participants(items)}
-    {#each items as item(item.id)}
-        <div role="button" tabindex="{item.id}">
-            <div class="objet-draggable">
-                <span>{item.nom || item.name}</span>
-            </div>
-        </div>
-    {/each}
-{/snippet}
-
 {#if infos}
-{console.log(infos)}
-    <!-- <h5>Sans voitures aller</h5>
-    {@render liste_participants(infos.participants
-                    .filter((v) => v[`voiture_aller_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom)))}
-
-    <h5>Voitures aller</h5>
-    <button>Ajouter voiture aller</button>
-    {#each infos.voitures as v}
-        <h5>{v.nom}</h5>
-        {@render liste_participants(v[`passagers_aller`])}
-    {/each}
-
-    <hr>
-    <h5>Sans voitures retour</h5>
-    {@render liste_participants(infos.participants
-                    .filter((v) => v[`voiture_retour_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom)))}
-
-    <h5>Voitures retour</h5>
-    <button>Ajouter voiture retour</button>
-    {#each infos.voitures as v}
-        <h5>{v.nom}</h5>
-        {@render liste_participants(v[`passagers_retour`])}
-    {/each} -->
-
-
- 
     {#each infos.trajets.split("/") as typeTrajet}
         <h1>Sans voitures {typeTrajet}</h1>
         {@render liste_participants(infos.participants
@@ -79,6 +37,16 @@
 {/if}
 
 
+
+{#snippet liste_participants(items)}
+    {#each items as item(item.id)}
+        <div role="button" tabindex="{item.id}">
+            <div class="objet-draggable">
+                <span>{item.nom || item.name}</span>
+            </div>
+        </div>
+    {/each}
+{/snippet}
 
 
 
