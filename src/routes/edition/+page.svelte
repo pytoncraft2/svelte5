@@ -2,7 +2,6 @@
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
     import { GET } from "$lib/utils";
-    import DatePicker from "./DatePicker.svelte";
 
     let id = $state();
     let infos = $state();
@@ -60,16 +59,6 @@
     {/each}
   </select>
 </label>
-
-<h3>Start Date</h3>
-<input type="text" bind:value={startDate}/>
- <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
-<DatePicker bind:value={startDate} {...locale[culture]}/>
-
-<h3>End Date</h3>
-<input type="text" bind:value={endDate}/>
- <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
-<DatePicker bind:value={endDate} {...locale[culture]}/>
 
 {#if infos}
 {console.log(infos)}
