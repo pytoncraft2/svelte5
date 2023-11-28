@@ -20,7 +20,6 @@
         console.log(id);
         
 	})
-	let { message = `it's great to see you!` } = $props();
 </script>
 
 {#snippet liste_participants()}
@@ -31,8 +30,6 @@
 </ul>
 {/snippet}
 
-
-
 <div class="grid-container">
   <div class="item2">
     <h5>Sans voitures</h5>
@@ -40,29 +37,30 @@
   </div>
 
   <div class="item3">
-    <h1>Voitures</h1>
+    <h5>Voitures</h5>
     <button>Ajouter voiture</button>
-    {#each {length: 3} as _, i}
-        <p>Voiture {i}</p>
-        {#each {length: 5} as _, x}
-            {@render liste_participants()}
+    <div id="liste-voitures">
+        {#each {length: 3} as _, i}
+        <div class="voiture">
+            <p>Voiture {i}</p>
+            {#each {length: 5} as _, x}
+                {@render liste_participants()}
+            {/each}
+        </div>
         {/each}
-    {/each}
+    </div>
   </div>  
-  <div class="item5">Footer</div>
 </div>
-
 
 <style>
 .item2 { grid-area: menu; }
 .item3 { grid-area: main; }
-.item5 { grid-area: footer; }
 
 .grid-container {
   display: grid;
   grid-template-areas:
     'menu main main main main main'
-    'menu footer footer footer footer footer';
+    'menu main main main main main';
   gap: 10px;
   background-color: #2196F3;
   padding: 10px;
@@ -73,6 +71,15 @@
   text-align: center;
   padding: 20px 0;
   font-size: 30px;
+}
+
+#liste-voitures {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.voiture {
+    flex:1;
 }
 </style>
 
