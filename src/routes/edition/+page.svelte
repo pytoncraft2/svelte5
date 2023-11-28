@@ -2,9 +2,15 @@
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
     import { GET } from "$lib/utils";
+    import Modal from "$lib/modal/Modal.svelte";
+    import AjoutPassager from "./form/AjoutPassager.svelte";
+    import AjoutVoiture from "./form/AjoutVoiture.svelte";
 
     let id = $state();
     let infos = $state();
+    let showModal = $state(false);
+    let modalContent = $state()
+    let modalData = $state();
     const searchParams = browser && $page.url.searchParams;
 
 	$effect(() => {
@@ -18,6 +24,12 @@
         }
 	})
 
+    function toggleModal(component, data) {
+        modalContent = component;
+        showModal = !showModal;
+        modalData = data;
+    }
+
 </script>
 
 {#if infos}
@@ -28,15 +40,18 @@
                         .sort((a, b) => a.nom.localeCompare(b.nom)))}
 
         <h3>Voitures {typeTrajet}</h3>
-            <button>Ajouter voiture {typeTrajet}</button>
-            {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
-                <h5>{v.nom}</h5>
-                {@render liste_participants(v[`passagers_${typeTrajet}`])}
-            {/each}        
+        <button onclick={() => toggleModal(AjoutVoiture, {
+                            typeTrajet,
+                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
+                        })}>Ajouter voiture {typeTrajet}</button>
+        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
+            <h5>{v.nom}</h5>
+            {@render liste_participants(v[`passagers_${typeTrajet}`])}
+        {/each}        
     {/each}
 {/if}
 
-
+<Modal bind:showModal {modalContent} {modalData} {infos} />
 
 {#snippet liste_participants(items)}
     {#each items as item(item.id)}
