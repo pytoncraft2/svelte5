@@ -22,23 +22,6 @@
         
 	})
 
-  let startDate = $state("2022-03-01");
-  let endDate = $state("2022-03-03");
-  
-  const locale = {
-    fr: {
-      days: "Di|Lu|Ma|Me|Je|Ve|Sa".split("|"),
-      months: "Jan|Fev|Mar|Avr|Mai|Juin|Juil|Aout|Sep|Oct|Nov|Dec".split('|'),
-      start: 0,
-    },
-    en: {
-      days: "Su|Mo|Tu|We|Th|Fr|Sa".split("|"),
-      months: "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec".split('|'),
-      start: 0,
-    }
-  }
-  
-  let culture = $state("fr");
 </script>
 
 {#snippet liste_participants(items)}
@@ -50,15 +33,6 @@
         </div>
     {/each}
 {/snippet}
-
-<label>
-  Culture:
-  <select bind:value={culture}>
-    {#each Object.keys(locale) as lang}
-    <option value={lang}>{lang}</option>
-    {/each}
-  </select>
-</label>
 
 {#if infos}
 {console.log(infos)}
