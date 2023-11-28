@@ -29,7 +29,7 @@
     let id;
     let donnesPrecharge;
 
-    onMount(() => {
+	$effect(() => {
         const searchParams = browser && $page.url.searchParams;
 
         if (searchParams && searchParams.get("titre")) {
@@ -141,7 +141,7 @@
     <div in:fly={{ y: 100, duration: 200, delay: 100 }} out:fly={{ x: -100, duration: 100 }}>
 
         {#if donnesPrecharge}
-            <button class="bouton-style incorrect" on:click={supprimerEvenement}>Supprimer l'événement</button>
+            <button class="bouton-style incorrect" onclick={supprimerEvenement}>Supprimer l'événement</button>
         {/if}
         <h1>{donnesPrecharge ? 'Modifier' : 'Création'} événement</h1>
         
@@ -242,8 +242,8 @@
                 <h4>👥 Personnes présentes ({listePersonnes.length})</h4>
                     <div class="option-saisie">
                         <em>Option de saisie: </em>
-                        <input type="button" class:multiSaisie on:click={() => multiSaisie = true} value="Individuellement" />
-                        <input type="button" class:multiSaisie={!multiSaisie} on:click={() => multiSaisie = false}  value="Liste" />
+                        <input type="button" class:multiSaisie onclick={() => multiSaisie = true} value="Individuellement" />
+                        <input type="button" class:multiSaisie={!multiSaisie} onclick={() => multiSaisie = false}  value="Liste" />
                     </div>
 
                     {#if multiSaisie}
@@ -259,7 +259,7 @@
                             <button
                                 type="button"
                                 class="filled"
-                                on:click={() => ajouterPersonne(personneValeur)}>Ajouter</button
+                                onclick={() => ajouterPersonne(personneValeur)}>Ajouter</button
                             >
                         </div>
                     {:else}
@@ -283,7 +283,7 @@
                                 <button
                                     type="button"
                                     class="bouton-suppression"
-                                    on:click={() => enleverPersonne(i)}>Enlever</button
+                                    onclick={() => enleverPersonne(i)}>Enlever</button
                                 >
                             </div>
                         {/each}
@@ -299,23 +299,23 @@
                             placeholder="Exemple : Tente 6 places"
                             bind:this={matosInputRef}
                             bind:value={matosValeur}
-                            on:keydown={(e) => captureEntrer(e, () => ajouterMatos(matosValeur))}
+                            onkeydown={(e) => captureEntrer(e, () => ajouterMatos(matosValeur))}
                         />
 
                         <button
                             type="button"
                             class="filled"
-                            on:click={() => ajouterMatos(matosValeur)}>Ajouter</button
+                            onclick={() => ajouterMatos(matosValeur)}>Ajouter</button
                         >
                     </div>
                     <div id="liste-matos">
-                        {#each listeMatos as matos, i}
+                        {#each listeMatos as matos, ind}
                             <div class="input-bouton">
                                 <input type="text" value={matos.nom} />
                                 <button
                                     type="button"
                                     class="bouton-suppression"
-                                    on:click={() => enleverMatos(i)}>Enlever</button
+                                    onclick={() => enleverMatos(ind)}>Enlever</button
                                 >
                             </div>
                         {/each}
@@ -335,7 +335,7 @@
     </div>
 
     {#if donnesPrecharge}
-        <div><button on:click={() => goto(`/edition/?url=${id}`)} class="bouton-page-evenement">Retour à la page d'événement</button></div>
+        <div><button onclick={() => goto(`/edition/?url=${id}`)} class="bouton-page-evenement">Retour à la page d'événement</button></div>
     {/if}
 </Container>
 
