@@ -31,17 +31,50 @@
 </ul>
 {/snippet}
 
-<h1>Sans voitures</h1>
-{@render liste_participants()}
 
-<h1>Voitures</h1>
-<button>Ajouter voiture</button>
-{#each {length: 3} as _, i}
-    <p>Voiture {i}</p>
-    {#each {length: 5} as _, x}
-        {@render liste_participants()}
+
+<div class="grid-container">
+  <div class="item2">
+    <h5>Sans voitures</h5>
+    {@render liste_participants()}
+  </div>
+
+  <div class="item3">
+    <h1>Voitures</h1>
+    <button>Ajouter voiture</button>
+    {#each {length: 3} as _, i}
+        <p>Voiture {i}</p>
+        {#each {length: 5} as _, x}
+            {@render liste_participants()}
+        {/each}
     {/each}
-{/each}
+  </div>  
+  <div class="item5">Footer</div>
+</div>
+
+
+<style>
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+.item5 { grid-area: footer; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'menu main main main main main'
+    'menu footer footer footer footer footer';
+  gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
 
 
 
