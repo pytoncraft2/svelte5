@@ -2,6 +2,8 @@
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
     import { GET } from "$lib/utils";
+    import DatePicker from "./DatePicker.svelte";
+
     let id = $state();
     let infos = $state();
     const searchParams = browser && $page.url.searchParams;
@@ -20,6 +22,24 @@
         console.log(id);
         
 	})
+
+  let startDate = $state("2022-03-01");
+  let endDate = $state("2022-03-03");
+  
+  const locale = {
+    fr: {
+      days: "Di|Lu|Ma|Me|Je|Ve|Sa".split("|"),
+      months: "Jan|Fev|Mar|Avr|Mai|Juin|Juil|Aout|Sep|Oct|Nov|Dec".split('|'),
+      start: 0,
+    },
+    en: {
+      days: "Su|Mo|Tu|We|Th|Fr|Sa".split("|"),
+      months: "Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec".split('|'),
+      start: 0,
+    }
+  }
+  
+  let culture = $state("fr");
 </script>
 
 {#snippet liste_participants(items)}
@@ -32,8 +52,28 @@
     {/each}
 {/snippet}
 
+<label>
+  Culture:
+  <select bind:value={culture}>
+    {#each Object.keys(locale) as lang}
+    <option value={lang}>{lang}</option>
+    {/each}
+  </select>
+</label>
+
+<h3>Start Date</h3>
+<input type="text" bind:value={startDate}/>
+ <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+<DatePicker bind:value={startDate} {...locale[culture]}/>
+
+<h3>End Date</h3>
+<input type="text" bind:value={endDate}/>
+ <input type="time" id="appt" name="appt" min="09:00" max="18:00" required />
+<DatePicker bind:value={endDate} {...locale[culture]}/>
+
 {#if infos}
-    <h5>Sans voitures aller</h5>
+{console.log(infos)}
+    <!-- <h5>Sans voitures aller</h5>
     {@render liste_participants(infos.participants
                     .filter((v) => v[`voiture_aller_id`] === null)
                     .sort((a, b) => a.nom.localeCompare(b.nom)))}
@@ -41,10 +81,41 @@
     <h5>Voitures aller</h5>
     <button>Ajouter voiture aller</button>
     {#each infos.voitures as v}
-        <h5>{v.details}</h5>
+        <h5>{v.nom}</h5>
         {@render liste_participants(v[`passagers_aller`])}
     {/each}
+
+    <hr>
+    <h5>Sans voitures retour</h5>
+    {@render liste_participants(infos.participants
+                    .filter((v) => v[`voiture_retour_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom)))}
+
+    <h5>Voitures retour</h5>
+    <button>Ajouter voiture retour</button>
+    {#each infos.voitures as v}
+        <h5>{v.nom}</h5>
+        {@render liste_participants(v[`passagers_retour`])}
+    {/each}
+
+ -->
+ 
+    {#each infos.trajets.split("/") as typeTrajet}
+        <h5>Sans voitures {typeTrajet}</h5>
+        {@render liste_participants(infos.participants
+                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                        .sort((a, b) => a.nom.localeCompare(b.nom)))}
+
+        <h3>Voitures {typeTrajet}</h3>
+            <button>Ajouter voiture {typeTrajet}</button>
+            {#each infos.voitures as v}
+                <h5>{v.nom}</h5>
+                {@render liste_participants(v[`passagers_${typeTrajet}`])}
+            {/each}        
+    {/each}
 {/if}
+
+
 
 
 
