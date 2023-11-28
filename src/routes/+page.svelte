@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { DateInput } from 'date-picker-svelte'
 	type Todo = {
 		text: string
 		done: boolean
@@ -62,10 +61,7 @@
 		return todos.filter((todo) => !todo.done).length
 	}
 
-	let date = new Date()
-
 </script>
-<DateInput bind:value={date} />
 
 <input onkeydown={addTodo} placeholder="Add todo" type="text" />
 

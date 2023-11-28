@@ -3,12 +3,9 @@
     import { browser } from "$app/environment";
     import { fade, fly } from "svelte/transition";
     import { POST, GET, PUT, DELETE } from "$lib/utils";
-    import SveltyPicker, { config } from "svelty-picker";
     import { page } from "$app/stores";
-    import { fr } from "svelty-picker/i18n";
     import { goto } from "$app/navigation";
     import Container from "$lib/disposition/container/Container.svelte";
-    config.i18n = fr;
 
     let matosInputRef;
     let personneInputRef;
@@ -110,9 +107,6 @@
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());
 
-        delete data["date_depart_input"];
-        delete data["date_retour_input"];
-
         if (donnesPrecharge) {
             PUT(`/api/evenement/${id}`, data)
                 .then(e => console.log("changement effectué", e))
@@ -167,25 +161,27 @@
             <div class="dates">
                 <div>
                     Date et heure de départ<br />
-                    <SveltyPicker
+                    <input type="datetime-local" name="date_depart">
+                    <!-- <SveltyPicker
                         mode="datetime"
                         i18n={fr}
                         format="dd/mm/yyyy hh:ii"
                         value={donnesPrecharge?.date_depart || ''}
                         bind:dateHeureDepart
                         name="date_depart"
-                    />
+                    /> -->
                 </div>
                 <div>
                     Date et heure de retour<br />
-                    <SveltyPicker
+                    <input type="datetime-local" name="date_retour">
+                    <!-- <SveltyPicker
                         mode="datetime"
                         i18n={fr}
                         format="dd/mm/yyyy hh:ii"
                         value={donnesPrecharge?.date_retour || ''}
                         bind:dateHeureRetour
                         name="date_retour"
-                    />
+                    /> -->
                 </div>
             </div>
 
