@@ -3,7 +3,7 @@
     import { browser } from "$app/environment";
     import { GET } from "$lib/utils";
     let id = $state();
-    let infos;
+    let infos = $state();
     const searchParams = browser && $page.url.searchParams;
 
 	$effect(() => {
@@ -22,66 +22,29 @@
 	})
 </script>
 
-{#snippet liste_participants()}
-<ul style="border: 1px solid;">
-    <li>run</li>
-    <li>run</li>
-    <li>run</li>
-</ul>
+{#snippet liste_participants(items)}
+    {#each items as item(item.id)}
+        <div role="button" tabindex="{item.id}">
+            <div class="objet-draggable">
+                <span>{item.nom || item.name}</span>
+            </div>
+        </div>
+    {/each}
 {/snippet}
 
-<div class="grid-container">
-  <div class="item2">
-    <h5>Sans voitures</h5>
-    {@render liste_participants()}
-  </div>
+{#if infos}
+    <h5>Sans voitures aller</h5>
+    {@render liste_participants(infos.participants
+                    .filter((v) => v[`voiture_aller_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom)))}
 
-  <div class="item3">
-    <h5>Voitures</h5>
-    <button>Ajouter voiture</button>
-    <div id="liste-voitures">
-        {#each {length: 3} as _, i}
-        <div class="voiture">
-            <p>Voiture {i}</p>
-            {#each {length: 5} as _, x}
-                {@render liste_participants()}
-            {/each}
-        </div>
-        {/each}
-    </div>
-  </div>  
-</div>
-
-<style>
-.item2 { grid-area: menu; }
-.item3 { grid-area: main; }
-
-.grid-container {
-  display: grid;
-  grid-template-areas:
-    'menu main main main main main'
-    'menu main main main main main';
-  gap: 10px;
-  background-color: #2196F3;
-  padding: 10px;
-}
-
-.grid-container > div {
-  background-color: rgba(255, 255, 255, 0.8);
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
-}
-
-#liste-voitures {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.voiture {
-    flex:1;
-}
-</style>
+    <h5>Voitures aller</h5>
+    <button>Ajouter voiture aller</button>
+    {#each infos.voitures as v}
+        <h5>{v.details}</h5>
+        {@render liste_participants(v[`passagers_aller`])}
+    {/each}
+{/if}
 
 
 
