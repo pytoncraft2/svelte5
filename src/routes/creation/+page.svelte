@@ -12,8 +12,6 @@
 
     let titreRef;
     let descriptionInputRef;
-    let dateHeureDepart;
-    let dateHeureRetour;
     let listePersonnes = [];
     let listeMatos = [];
     let matosValeur = "";
@@ -162,26 +160,10 @@
                 <div>
                     Date et heure de départ<br />
                     <input type="datetime-local" name="date_depart">
-                    <!-- <SveltyPicker
-                        mode="datetime"
-                        i18n={fr}
-                        format="dd/mm/yyyy hh:ii"
-                        value={donnesPrecharge?.date_depart || ''}
-                        bind:dateHeureDepart
-                        name="date_depart"
-                    /> -->
                 </div>
                 <div>
                     Date et heure de retour<br />
                     <input type="datetime-local" name="date_retour">
-                    <!-- <SveltyPicker
-                        mode="datetime"
-                        i18n={fr}
-                        format="dd/mm/yyyy hh:ii"
-                        value={donnesPrecharge?.date_retour || ''}
-                        bind:dateHeureRetour
-                        name="date_retour"
-                    /> -->
                 </div>
             </div>
 
