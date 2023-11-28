@@ -59,19 +59,19 @@
     {#each infos.voitures as v}
         <h5>{v.nom}</h5>
         {@render liste_participants(v[`passagers_retour`])}
-    {/each}
+    {/each} -->
 
- -->
+
  
     {#each infos.trajets.split("/") as typeTrajet}
-        <h5>Sans voitures {typeTrajet}</h5>
+        <h1>Sans voitures {typeTrajet}</h1>
         {@render liste_participants(infos.participants
                         .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                         .sort((a, b) => a.nom.localeCompare(b.nom)))}
 
         <h3>Voitures {typeTrajet}</h3>
             <button>Ajouter voiture {typeTrajet}</button>
-            {#each infos.voitures as v}
+            {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
                 <h5>{v.nom}</h5>
                 {@render liste_participants(v[`passagers_${typeTrajet}`])}
             {/each}        
