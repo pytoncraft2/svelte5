@@ -8,7 +8,7 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.27.4",
 		"svelte": "^5.0.0-next.1",
 		"sass": "^1.69.1",
@@ -16,10 +16,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sveltejs/adapter-static": "^2.0.3",
 		"date-picker-svelte": "^2.10.0",
-		"svelty-picker": "^5.2.0",
-		"@fontsource-variable/manrope": "^5.0.17",
-		"open-props": "^1.6.11"
+		"svelty-picker": "^5.2.0"
 	}
 }
