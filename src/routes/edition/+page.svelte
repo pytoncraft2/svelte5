@@ -69,11 +69,12 @@
                         .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                         .sort((a, b) => a.nom.localeCompare(b.nom))} />
         {/snippet}
-        <h3>Voitures {typeTrajet}</h3>
+        {#snippet bouton_ajout_voiture()}
         <button onclick={() => toggleModal(AjoutVoiture, {
                             typeTrajet,
                             titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                         })}>Ajouter voiture {typeTrajet}</button>
+        {/snippet}
         {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index}
             <h5>{voiture.nom}</h5>
             <Liste items={voiture[`passagers_${typeTrajet}`]} />
