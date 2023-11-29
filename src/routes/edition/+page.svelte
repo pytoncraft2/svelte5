@@ -31,10 +31,6 @@
         modalData = data;
     }
 
-    function test() {
-        console.log("TEST OK");
-    }
-
 </script>
 
 {#if infos}
@@ -43,7 +39,7 @@
         <Liste items={infos.participants
                         .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                         .sort((a, b) => a.nom.localeCompare(b.nom))}>
-            {#snippet personne(item)}<span>{item}</span>{/snippet}
+            {#snippet personne(nom)}{nom}{/snippet}
         </Liste>
 
         <h3>Voitures {typeTrajet}</h3>
@@ -51,35 +47,21 @@
                             typeTrajet,
                             titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                         })}>Ajouter voiture {typeTrajet}</button>
-        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
-            <h5>{v.nom}</h5>
-            <Liste items={v[`passagers_${typeTrajet}`]}>
-                {#snippet personne(item)} <span>{item}</span> {/snippet}
+        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture}
+            <h5>{voiture.nom}</h5>
+            <Liste items={voiture[`passagers_${typeTrajet}`]}>
+                {#snippet personne(nom)}{nom}{/snippet}
             </Liste>
-        {/each}        
+            <button onclick={() =>
+                toggleModal(AjoutPassager, {
+                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                })}>Ajouter passager</button>
+            <button>Ajouter Materiel</button>
+        {/each}
     {/each}
 {/if}
 
 <Modal bind:showModal {modalContent} {modalData} {infos} />
-
-{#snippet liste_participants(items)}
-    {#each items as item(item.id)}
-        <div role="button" tabindex="{item.id}" onclick={test}>
-            <div class="objet-draggable">
-                <span>{item.nom || item.name}</span>
-            </div>
-        </div>
-    {/each}
-{/snippet}
-
-
-
-
-
-
-
-
-
 
 <!-- <ZoneTrajets>
     {#each infos.trajets.split("/") as typeTrajet}
