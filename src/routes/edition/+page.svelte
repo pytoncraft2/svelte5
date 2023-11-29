@@ -40,9 +40,11 @@
 {#if infos}
     {#each infos.trajets.split("/") as typeTrajet}
         <h1>Sans voitures {typeTrajet}</h1>
-        {@render liste_participants(infos.participants
+        <Liste items={infos.participants
                         .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                        .sort((a, b) => a.nom.localeCompare(b.nom)))}
+                        .sort((a, b) => a.nom.localeCompare(b.nom))}>
+            {#snippet personne(item)}<span>{item}</span>{/snippet}
+        </Liste>
 
         <h3>Voitures {typeTrajet}</h3>
         <button onclick={() => toggleModal(AjoutVoiture, {
@@ -51,8 +53,9 @@
                         })}>Ajouter voiture {typeTrajet}</button>
         {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as v}
             <h5>{v.nom}</h5>
-            <Liste items={v[`passagers_${typeTrajet}`]} {liste_participants} />
-            <!-- {@render liste_participants(v[`passagers_${typeTrajet}`])} -->
+            <Liste items={v[`passagers_${typeTrajet}`]}>
+                {#snippet personne(item)} <span>{item}</span> {/snippet}
+            </Liste>
         {/each}        
     {/each}
 {/if}
@@ -61,11 +64,11 @@
 
 {#snippet liste_participants(items)}
     {#each items as item(item.id)}
-        <!-- <div role="button" tabindex="{item.id}" onclick={test}> -->
-            <!-- <div class="objet-draggable"> -->
+        <div role="button" tabindex="{item.id}" onclick={test}>
+            <div class="objet-draggable">
                 <span>{item.nom || item.name}</span>
-            <!-- </div> -->
-        <!-- </div> -->
+            </div>
+        </div>
     {/each}
 {/snippet}
 
