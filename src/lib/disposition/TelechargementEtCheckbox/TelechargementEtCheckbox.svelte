@@ -42,4 +42,42 @@
 
     }
 }
+
+
+
+
+
+    #t {
+        display: flex;
+        gap: 1em;
+        justify-content: center;
+        flex-direction: var(--horizontale);
+        // @media screen and (max-width: 888px) {
+            // flex-direction: column;
+        // }
+    }
+
+    // :global(#invisible-flex) {
+    //     display: var(--invisible);
+    // }
+
+    // :global(.liste) {
+        // display: var(--liste) !important;
+        // width: auto !important;
+    // }
+
+    :global(.zoneListes) {
+        flex: 1 !important;
+        // max-width: none !important;
+    }
+
+    :global(.groupe-liste) {
+        flex-direction: var(--p-haut);
+    }
+
+    :global(.zone-participant-sans-voiture) {
+        max-width: var(--z-participant-sv);
+        display: var(--z-participant-display);
+    }
+
 </style>

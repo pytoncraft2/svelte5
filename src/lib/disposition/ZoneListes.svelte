@@ -38,6 +38,7 @@
             align-items: center;
             border: 1px solid #000;
             padding: 10px;
+            margin-left: 25%;
         }
 
         .bar-text span {
