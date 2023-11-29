@@ -65,10 +65,7 @@
         <h1>Sans voitures {typeTrajet}</h1>
         <Liste items={infos.participants
                         .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                        .sort((a, b) => a.nom.localeCompare(b.nom))}>
-            {#snippet personne(nom)}{nom}{/snippet}
-        </Liste>
-
+                        .sort((a, b) => a.nom.localeCompare(b.nom))} />
         <h3>Voitures {typeTrajet}</h3>
         <button onclick={() => toggleModal(AjoutVoiture, {
                             typeTrajet,
@@ -76,16 +73,12 @@
                         })}>Ajouter voiture {typeTrajet}</button>
         {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index}
             <h5>{voiture.nom}</h5>
-            <Liste items={voiture[`passagers_${typeTrajet}`]}>
-                {#snippet personne(nom)}{nom}{/snippet}
-            </Liste>
+            <Liste items={voiture[`passagers_${typeTrajet}`]} />
             <button onclick={() =>
                 toggleModal(AjoutPassager, {
                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                 })}>Ajouter passager</button>
-            <Liste items={infos.voitures[index][`materiels_${typeTrajet}`]}>
-                {#snippet personne(nom)}{nom}{/snippet}
-            </Liste>
+            <Liste items={infos.voitures[index][`materiels_${typeTrajet}`]} />
             <button>Ajouter Materiel</button>
         {/each}
     {/each}
