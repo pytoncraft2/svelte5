@@ -5,13 +5,30 @@
     import Modal from "$lib/modal/Modal.svelte";
     import AjoutPassager from "./form/AjoutPassager.svelte";
     import AjoutVoiture from "./form/AjoutVoiture.svelte";
+    import BandeauInfo from "$lib/BandeauInfo.svelte";
+    import TelechargementEtCheckbox from "$lib/disposition/TelechargementEtCheckbox/TelechargementEtCheckbox.svelte";
     import Liste from "../../lib/liste/Liste.svelte";
 
     let id = $state();
-    let infos = $state();
+    let infos = $state({
+    "titre": "Chargement...",
+    "loading": true,
+    "voitures": [],
+    "participants": [],
+    "materiels": [],
+    "description": "...",
+    "lieu_depart": "...",
+    "lieu_depart_info": "...",
+    "lieu_destination": "...",
+    "lieu_destination_info": "...",
+    "trajets": "aller/retour",
+    "date_depart": "...",
+    "date_retour": "..."
+});
     let showModal = $state(false);
     let modalContent = $state()
     let modalData = $state();
+
     const searchParams = browser && $page.url.searchParams;
 
 	$effect(() => {
@@ -30,9 +47,19 @@
         showModal = !showModal;
         modalData = data;
     }
+    let config = {
+        "Afficher participant sans voiture": true,
+        "Trajets côte à côte": false,
+        "Participant sans voiture en haut": false,
+    };
 
+    function telechargement(e) {
+        setTimeout(() => { window.print() }, 100);
+    }
 </script>
 
+<BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
+<TelechargementEtCheckbox bind:config {telechargement} />
 {#if infos}
     {#each infos.trajets.split("/") as typeTrajet}
         <h1>Sans voitures {typeTrajet}</h1>

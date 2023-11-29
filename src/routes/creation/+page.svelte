@@ -5,7 +5,6 @@
     import { POST, GET, PUT, DELETE } from "$lib/utils";
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
-    import Container from "$lib/disposition/container/Container.svelte";
 
     let matosInputRef;
     let personneInputRef;
@@ -129,7 +128,7 @@
         }
     }
 </script>
-<Container>
+<div class="container">
     <div in:fly={{ y: 100, duration: 200, delay: 100 }} out:fly={{ x: -100, duration: 100 }}>
 
         {#if donnesPrecharge}
@@ -315,7 +314,7 @@
     {#if donnesPrecharge}
         <div><button onclick={() => goto(`/edition/?url=${id}`)} class="bouton-page-evenement">Retour à la page d'événement</button></div>
     {/if}
-</Container>
+</div>
 
 <style lang="scss">
     @use "../../lib/scss/color" as clr;
