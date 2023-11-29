@@ -18,7 +18,7 @@
         id = searchParams.get("url");
         if (id) {
             GET(`/api/evenement/${id}`)
-                .then((v) => infos = v)
+                .then((v) => (infos = v, console.log(v)))
                 .catch((e) => console.log(e));
         } else {
             window.location.href = "/";
@@ -47,7 +47,7 @@
                             typeTrajet,
                             titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                         })}>Ajouter voiture {typeTrajet}</button>
-        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture}
+        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index}
             <h5>{voiture.nom}</h5>
             <Liste items={voiture[`passagers_${typeTrajet}`]}>
                 {#snippet personne(nom)}{nom}{/snippet}
@@ -56,6 +56,9 @@
                 toggleModal(AjoutPassager, {
                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                 })}>Ajouter passager</button>
+            <Liste items={infos.voitures[index][`materiels_${typeTrajet}`]}>
+                {#snippet personne(nom)}{nom}{/snippet}
+            </Liste>
             <button>Ajouter Materiel</button>
         {/each}
     {/each}
