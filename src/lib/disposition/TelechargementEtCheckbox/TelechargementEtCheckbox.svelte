@@ -1,5 +1,12 @@
 <script>
-    let {config, telechargement} = $props();
+    let config = {
+        "Afficher participant sans voiture": true,
+        "Trajets côte à côte": false,
+        "Participant sans voiture en haut": false,
+    };  
+    function telechargement(e) {
+        setTimeout(() => { window.print() }, 100);
+    }
 </script>
 <div class="liste-checkbox">
     <div class="checkboxs">
