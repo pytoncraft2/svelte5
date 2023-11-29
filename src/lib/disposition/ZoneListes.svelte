@@ -1,31 +1,36 @@
 <script>
-    let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, typeTrajet } = $props();
+    let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets } = $props();
 </script>
 
+
 <div class="zoneListes">
-<h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
-<div class="groupe-liste" style="opacity: var(--container-opacity)">
-    <div class="zone-participant-sans-voiture">
-        <div class="liste">
-            <!-- liste sans voitures -->
-            {@render participants_sans_voiture(typeTrajet)}
-        </div>
-    </div>
-
-        <div class="zone-bouton-voitures">
-            <div class="groupe-boutons ajouts">
-                <!-- bouton ajout voiture -->
-                {@render bouton_ajout_voiture(typeTrajet)}
-            </div>
-
-
-            <div class="zone-voiture">
-                <!-- liste des voitures -->
-                {@render participants_avec_voiture(typeTrajet)}
+    {#each trajets as typeTrajet}
+    <div class="zoneListe">
+    <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
+    <div class="groupe-liste" style="opacity: var(--container-opacity)">
+        <div class="zone-participant-sans-voiture">
+            <div class="liste">
+                <!-- liste sans voitures -->
+                {@render participants_sans_voiture(typeTrajet)}
             </div>
         </div>
-        <!-- <div id="invisible-flex"></div> -->
+
+            <div class="zone-bouton-voitures">
+                <div class="groupe-boutons ajouts">
+                    <!-- bouton ajout voiture -->
+                    {@render bouton_ajout_voiture(typeTrajet)}
+                </div>
+
+
+                <div class="zone-voiture">
+                    <!-- liste des voitures -->
+                    {@render participants_avec_voiture(typeTrajet)}
+                </div>
+            </div>
+            <!-- <div id="invisible-flex"></div> -->
+        </div>
     </div>
+{/each}
 </div>
 
 <style lang="scss">

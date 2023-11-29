@@ -55,9 +55,7 @@
 
 <BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
 <TelechargementEtCheckbox />
-<div id="t">
-{#each infos.trajets.split("/") as typeTrajet}
-<ZoneListes {typeTrajet}>
+<ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(trajet)}
     <Liste items={infos.participants
                     .filter((v) => v[`voiture_${trajet}_id`] === null)
@@ -84,8 +82,6 @@
         {/each}
     {/snippet}
 </ZoneListes>
-{/each}
-</div>
 
 <Modal bind:showModal {modalContent} {modalData} {infos} />
 
