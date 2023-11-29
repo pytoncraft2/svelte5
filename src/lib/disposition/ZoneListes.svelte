@@ -1,6 +1,5 @@
 <script>
-    let { participants_sans_voiture, bouton_ajout_voiture, typeTrajet } = $props();
-    console.log(participants_sans_voiture);
+    let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, typeTrajet } = $props();
 </script>
 
 <div class="zoneListes">
@@ -9,20 +8,20 @@
     <div class="zone-participant-sans-voiture">
         <div class="liste">
             <!-- liste sans voitures -->
-            {@render participants_sans_voiture()}
+            {@render participants_sans_voiture(typeTrajet)}
         </div>
     </div>
 
         <div class="zone-bouton-voitures">
             <div class="groupe-boutons ajouts">
-                {@render bouton_ajout_voiture()}
+                <!-- bouton ajout voiture -->
+                {@render bouton_ajout_voiture(typeTrajet)}
             </div>
 
 
             <div class="zone-voiture">
-                    <slot name="participants-avec-voiture">
-                        <!-- liste des voitures -->
-                    </slot>
+                <!-- liste des voitures -->
+                {@render participants_avec_voiture(typeTrajet)}
             </div>
         </div>
         <!-- <div id="invisible-flex"></div> -->

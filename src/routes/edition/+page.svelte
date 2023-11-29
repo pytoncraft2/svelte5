@@ -64,27 +64,29 @@
 {#if infos}
     {#each infos.trajets.split("/") as typeTrajet}
     <ZoneListes {typeTrajet}>
-        {#snippet participants_sans_voiture()}
+        {#snippet participants_sans_voiture(trajet)}
         <Liste items={infos.participants
-                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                        .filter((v) => v[`voiture_${trajet}_id`] === null)
                         .sort((a, b) => a.nom.localeCompare(b.nom))} />
         {/snippet}
-        {#snippet bouton_ajout_voiture()}
+        {#snippet bouton_ajout_voiture(trajet)}
         <button onclick={() => toggleModal(AjoutVoiture, {
-                            typeTrajet,
-                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
-                        })}>Ajouter voiture {typeTrajet}</button>
+                            trajet,
+                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${trajet}</span>`,
+                        })}>Ajouter voiture {trajet}</button>
         {/snippet}
-        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index}
-            <h5>{voiture.nom}</h5>
-            <Liste items={voiture[`passagers_${typeTrajet}`]} />
-            <button onclick={() =>
-                toggleModal(AjoutPassager, {
-                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                })}>Ajouter passager</button>
-            <Liste items={infos.voitures[index][`materiels_${typeTrajet}`]} />
-            <button>Ajouter Materiel</button>
-        {/each}
+        {#snippet participants_avec_voiture(trajet)}
+            {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index}
+                <h5>{voiture.nom}</h5>
+                <Liste items={voiture[`passagers_${trajet}`]} />
+                <button onclick={() =>
+                    toggleModal(AjoutPassager, {
+                        titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                    })}>Ajouter passager</button>
+                <Liste items={infos.voitures[index][`materiels_${trajet}`]} />
+                <button>Ajouter Materiel</button>
+            {/each}
+        {/snippet}
     </ZoneListes>
     {/each}
 {/if}
