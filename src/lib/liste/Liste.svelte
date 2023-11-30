@@ -1,7 +1,7 @@
 <script>
 	import {activeZoneId, selectedItems} from "$lib/selectionStore";
 	let zoneId = `zone-${Math.floor(Math.random() * 1000000)}`;
-	let { items, personne } = $props();
+	let { passagers, personne } = $props();
 	function handleMaybeSelect(id, e) {
         console.log("HANDLE");
 		if ($activeZoneId !== zoneId) {
@@ -11,7 +11,7 @@
 		if (Object.keys($selectedItems).includes(`${id}`)) {
 			delete($selectedItems[`${id}`]);
 		} else {
-			$selectedItems[`${id}`] = items.find(item => item.id == id);
+			$selectedItems[`${id}`] = passagers.find(item => item.id == id);
 		}
 		$selectedItems = {...$selectedItems};
 	}
@@ -19,7 +19,7 @@
 
 <article>
 	<section  class="places">
-		{#each items as item(item.id)}
+		{#each passagers as item(item.id)}
 			<!-- <div class:selected={Object.keys($selectedItems).includes(`${item.id}`)} on:click={(e) => handleMaybeSelect(item.id, e)} on:keydown on:keyup role="button" tabindex="{item.id}"> -->
             <div class:selected={Object.keys($selectedItems).includes(`${item.id}`)} on:click={(e) => handleMaybeSelect(item.id, e)} on:keydown on:keyup role="button" tabindex="{item.id}">
 				<div class="objet-draggable">

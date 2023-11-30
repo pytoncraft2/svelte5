@@ -135,7 +135,7 @@
                         (v) => v[`voiture_${typeTrajet}_id`] === null,
                     ).length})</b>
                     <Liste
-                        items={infos.participants
+                        passagers={infos.participants
                             .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                             .sort((a, b) => a.nom.localeCompare(b.nom))}
                         materiels={infos.materiels
@@ -169,7 +169,7 @@
                 <b>{voiture.nom}</b>
                 <small>{voiture.nb_places} places</small>
                     <Liste
-                        items={infos.voitures[index][`passagers_${typeTrajet}`]}
+                        passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
                         {index}
                         {typeTrajet}
