@@ -8,9 +8,9 @@
 <input type="checkbox" bind:checked={afficheTrajetCoteACote} />
 <!-- <input type="checkbox" bind:checked={afficheSansVoitureDisplay} /> -->
 
-<div class="zoneListes">
+<div class="zoneListes" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'}>
     {#each trajets as typeTrajet}
-    <div class="zoneListe" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'}>
+    <div class="zoneListe" >
     <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
     <div class="groupe-liste" style="opacity: var(--container-opacity)">
         <div class="zone-participant-sans-voiture"
