@@ -86,18 +86,17 @@
                 {typeTrajet}
                 bind:infos
             />
-                <Bouton
-                    texte="Ajouter une voiture {typeTrajet} 🚘"
-                    on:click={() =>
+                <button
+                    onclick={() =>
                         toggleModal(AjoutVoiture, {
                             typeTrajet,
                             titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                         })}
-                />
+                >Ajouter une voiture {typeTrajet}</button>
 
             <!-- <ListeVoitures> -->
                 {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
-                    <ListeParticipants
+                    <Liste
                         items={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
                         titre={voiture.nom}
@@ -108,14 +107,13 @@
                         {toggleModal}
                         bind:infos
                     >
-                        <Bouton
-                            texte="Ajouter passager"
-                            on:click={() =>
+                        <button
+                            onclick={() =>
                                 toggleModal(AjoutPassager, {
                                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                                 })}
-                        />
-                    </ListeParticipants>
+                        >Ajouter passager</button>
+                    </Liste>
                 {/each}
             <!-- </ListeVoitures> -->
         <!-- </ZoneListes> -->
