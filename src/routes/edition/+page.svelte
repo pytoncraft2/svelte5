@@ -171,7 +171,6 @@
                     <Liste
                         passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
-                        {index}
                         {typeTrajet}
                         {voiture}
                         {toggleModal}
