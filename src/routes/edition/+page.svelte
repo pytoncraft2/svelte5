@@ -1,7 +1,7 @@
 <script>
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
-    import { GET } from "$lib/utils";
+    import { GET, PUT } from "$lib/utils";
     import Modal from "$lib/modal/Modal.svelte";
     import AjoutPassager from "./form/AjoutPassager.svelte";
     import AjoutVoiture from "./form/AjoutVoiture.svelte";
@@ -9,6 +9,7 @@
     import TelechargementEtCheckbox from "$lib/disposition/TelechargementEtCheckbox/TelechargementEtCheckbox.svelte";
     import Liste from "../../lib/liste/Liste.svelte";
     import ZoneListes from "../../lib/disposition/ZoneListes.svelte"
+    import {selectedItems} from "$lib/selectionStore";
 
     let id = $state();
     let infos = $state({
@@ -49,7 +50,29 @@
         modalData = data;
     }
 
+    function deplacement(i, headerText, typeTrajet, voiture) {
+		// console.log("DEPLACEMENT", i, headerText, typeTrajet);
+			// console.log($selectedItems);
+		if (Object.keys($selectedItems).length === 0) {
+			toggleModal(AjoutVoiture, { typeTrajet, voiture, titreModal: `Modifier voiture <br><span style='color: #006699'>${voiture.nom}</span>`})
+		} else {
+		const voiture_type_trajet = `voiture_${typeTrajet}_id`;
+		// console.log("TYPE TR",voiture_type_trajet, infos.voitures);
+		Object.values($selectedItems).map((p) => {
+			const voitureIdOuNull = infos.voitures && infos.voitures[i] ? infos.voitures[i].id : null;
 
+			PUT(`/api/evenement/${p.evenement_id}/participant/${p.id}`,
+			{[voiture_type_trajet]: voitureIdOuNull || null})
+			.then(e => {
+				if (voitureIdOuNull) {
+					console.log("DEPLACEMENT DS VOITURE");					
+				} else {
+					infos = infos;
+				}
+			}).catch(e => console.log(e))
+		});
+		}
+    }
 
 </script>
 
@@ -70,7 +93,7 @@
     {#snippet participants_avec_voiture(trajet)}
         {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index}
         <div>
-            <h5>{voiture.nom}</h5>
+            <h5 onclick={(e) => deplacement(index, 'lalalal', trajet, voiture)}>{voiture.nom}</h5>
             <Liste items={voiture[`passagers_${trajet}`]} />
             <button onclick={() =>
                 toggleModal(AjoutPassager, {
