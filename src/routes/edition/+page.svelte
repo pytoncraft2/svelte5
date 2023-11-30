@@ -168,14 +168,10 @@
 
                 <b>{voiture.nom}</b>
                 <small>{voiture.nb_places} places</small>
-                <div class="voiture"></div>
-                <div class="voiture"></div>
-                <div class="voiture"></div>
-                <div class="dispo">
-                    <div class="carre"></div>
-                    <div class="carre"></div>
-                    <div class="carre"></div>
-                    <div class="carre"></div>
+                <div class="carre-dispo">
+                {#each {length: voiture.nb_places} as _, i}
+                    <div class="voiture"></div>
+                {/each}
                 </div>
                     <Liste
                         passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
@@ -202,11 +198,14 @@
 </div>
 
 <style lang="scss">
+
+    .carre-dispo {
+        display: flex;
+    }
         .voiture {
-            width: 100px;
-            height: 50px;
-            border: 1px solid #ccc;
-            margin: 10px;
+            width: 20px;
+            height: 35px;
+            // border: 1px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -274,8 +273,8 @@
         .voiture::before {
             content: "";
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             margin: 0 2px;
             border: 1px solid #ccc;
             position: absolute;
