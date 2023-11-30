@@ -54,7 +54,7 @@
         // }
     }
 
-    :global(.invisible-flex) {
+    .invisible-flex {
         display: var(--sans-voiture-display);
     }
 
@@ -63,16 +63,16 @@
         // width: auto !important;
     // }
 
-    :global(.zoneListes) {
+    .zoneListes {
         flex: 1 !important;
         // max-width: none !important;
     }
 
-    :global(.groupe-liste) {
+    .groupe-liste {
         flex-direction: var(--p-haut);
     }
 
-    :global(.zone-participant-sans-voiture) {
+    .zone-participant-sans-voiture {
         max-width: var(--sans-voiture);
         display: var(--sans-voiture-display);
     }
@@ -188,7 +188,7 @@
 
     }
 
-        :global(.zone-voiture section.places) {
+        .zone-voiture section.places {
             flex-wrap: nowrap;
             flex-direction: column;
         }
