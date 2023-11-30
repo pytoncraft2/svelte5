@@ -60,16 +60,18 @@
 		// console.log("TYPE TR",voiture_type_trajet, infos.voitures);
 		Object.values($selectedItems).map((p) => {
 			const voitureIdOuNull = infos.voitures && infos.voitures[i] ? infos.voitures[i].id : null;
+            console.log("SELECTION", $selectedItems);
+            console.log(voitureIdOuNull, infos.voitures);
 
-			PUT(`/api/evenement/${p.evenement_id}/participant/${p.id}`,
-			{[voiture_type_trajet]: voitureIdOuNull || null})
-			.then(e => {
-				if (voitureIdOuNull) {
-					console.log("DEPLACEMENT DS VOITURE");					
-				} else {
-					infos = infos;
-				}
-			}).catch(e => console.log(e))
+			// PUT(`/api/evenement/${p.evenement_id}/participant/${p.id}`,
+			// {[voiture_type_trajet]: voitureIdOuNull || null})
+			// .then(e => {
+			// 	if (voitureIdOuNull) {
+			// 		console.log("DEPLACEMENT DS VOITURE");					
+			// 	} else {
+			// 		infos = infos;
+			// 	}
+			// }).catch(e => console.log(e))
 		});
 		}
     }
@@ -91,7 +93,7 @@
                     })}>Ajouter voiture {trajet}</button>
     {/snippet}
     {#snippet participants_avec_voiture(trajet)}
-        {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index}
+        {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index (voiture.id)}
         <div>
             <h5 onclick={(e) => deplacement(index, 'lalalal', trajet, voiture)}>{voiture.nom}</h5>
             <Liste items={voiture[`passagers_${trajet}`]} />
