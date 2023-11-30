@@ -121,43 +121,33 @@
 <!-- </ZoneTrajets> -->
 <ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(typeTrajet)}
-                <div>
-
-                <b>Participants sans voiture ({infos.participants.filter(
-                        (v) => v[`voiture_${typeTrajet}_id`] === null,
-                    ).length})</b>
-                    <Liste
-                        passagers={infos.participants
-                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                            .sort((a, b) => a.nom.localeCompare(b.nom))}
-                        materiels={infos.materiels
-                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                            .sort((a, b) => a.nom.localeCompare(b.nom))}
-                        {typeTrajet}
-                        bind:infos
-                    />
-                </div>
-    <!-- <Liste items={infos.participants
-                    .filter((v) => v[`voiture_${trajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))} /> -->
+        <div>
+        <b>Participants sans voiture ({infos.participants.filter(
+                (v) => v[`voiture_${typeTrajet}_id`] === null,
+            ).length})</b>
+            <Liste
+                passagers={infos.participants
+                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom))}
+                materiels={infos.materiels
+                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom))}
+                {typeTrajet}
+                bind:infos
+            />
+        </div>
     {/snippet}
     {#snippet bouton_ajout_voiture(typeTrajet)}
-                    <button
-                        onclick={() =>
-                            toggleModal(AjoutVoiture, {
-                                typeTrajet,
-                                titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
-                            })}
-                    >Ajouter une voiture {typeTrajet}</button>
-    <!-- <button onclick={() => toggleModal(AjoutVoiture, {
-                        trajet,
-                        titreModal: `Ajouter voiture <span style='color: #7CC724'>${trajet}</span>`,
-                    })}>Ajouter voiture {trajet}</button> -->
+        <button onclick={() =>
+                toggleModal(AjoutVoiture, {
+                    typeTrajet,
+                    titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
+                })}
+        >Ajouter une voiture {typeTrajet}</button>
     {/snippet}
     {#snippet participants_avec_voiture(typeTrajet)}
-                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
-                <div>
-
+        {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
+            <div>
                 <b>{voiture.nom}</b>
                 <small>{infos.voitures[index][`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
                 <div class="carre-dispo">
@@ -177,14 +167,14 @@
                         {toggleModal}
                         bind:infos
                     />
-                        <button
-                            onclick={() =>
-                                toggleModal(AjoutPassager, {
-                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                                })}
-                        >Ajouter passager</button>
-                </div>
-                {/each}
+                    <button
+                        onclick={() =>
+                            toggleModal(AjoutPassager, {
+                                titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                            })}
+                    >Ajouter passager</button>
+            </div>
+        {/each}
     {/snippet}
 </ZoneListes>
 

@@ -28,7 +28,7 @@
                     {@render participants_avec_voiture(typeTrajet)}
                 </div>
             </div>
-            <!-- <div id="invisible-flex"></div> -->
+            <div id="invisible-flex"></div>
         </div>
     </div>
 {/each}
