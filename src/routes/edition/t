@@ -1,0 +1,78 @@
+<div class="zoneListes">
+{#each infos.trajets.split("/") as typeTrajet}
+
+    <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
+    <div class="groupe-liste" style="opacity: var(--container-opacity)">
+        <div class="zone-participant-sans-voiture">
+            <div class="liste">
+
+                <div>
+
+                <b>Participants sans voiture ({infos.participants.filter(
+                        (v) => v[`voiture_${typeTrajet}_id`] === null,
+                    ).length})</b>
+                    <Liste
+                        passagers={infos.participants
+                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                            .sort((a, b) => a.nom.localeCompare(b.nom))}
+                        materiels={infos.materiels
+                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                            .sort((a, b) => a.nom.localeCompare(b.nom))}
+                        {typeTrajet}
+                        bind:infos
+                    />
+                </div>
+
+            </div>
+        </div>
+
+            <div class="zone-bouton-voitures">
+                <div class="groupe-boutons ajouts">
+                        <!-- bouton ajout voiture -->
+                    <button
+                        onclick={() =>
+                            toggleModal(AjoutVoiture, {
+                                typeTrajet,
+                                titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
+                            })}
+                    >Ajouter une voiture {typeTrajet}</button>
+                </div>
+
+
+                <div class="zone-voiture">
+                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
+                <div>
+
+                <b>{voiture.nom}</b>
+                <small>{infos.voitures[index][`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
+                <div class="carre-dispo">
+                {#each {length: voiture.nb_places} as _, i}
+                    {#if i >= infos.voitures[index][`passagers_${typeTrajet}`].length }
+                        <div class="voiture places-occupees"></div>
+                        {:else}
+                        <div class="voiture places-disponibles"></div>
+                    {/if}
+                {/each}
+                </div>
+                    <Liste
+                        passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
+                        materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
+                        {typeTrajet}
+                        {voiture}
+                        {toggleModal}
+                        bind:infos
+                    />
+                        <button
+                            onclick={() =>
+                                toggleModal(AjoutPassager, {
+                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                                })}
+                        >Ajouter passager</button>
+                </div>
+                {/each}
+                </div>
+            </div>
+            <div id="invisible-flex"></div>
+        </div>
+    {/each}
+</div>

@@ -119,16 +119,8 @@
         <!-- </ZoneListes> -->
     <!-- {/each} -->
 <!-- </ZoneTrajets> -->
-
-
-<div class="zoneListes">
-{#each infos.trajets.split("/") as typeTrajet}
-
-    <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
-    <div class="groupe-liste" style="opacity: var(--container-opacity)">
-        <div class="zone-participant-sans-voiture">
-            <div class="liste">
-
+<ZoneListes trajets={infos.trajets.split("/")}>
+    {#snippet participants_sans_voiture(typeTrajet)}
                 <div>
 
                 <b>Participants sans voiture ({infos.participants.filter(
@@ -145,13 +137,11 @@
                         bind:infos
                     />
                 </div>
-
-            </div>
-        </div>
-
-            <div class="zone-bouton-voitures">
-                <div class="groupe-boutons ajouts">
-                        <!-- bouton ajout voiture -->
+    <!-- <Liste items={infos.participants
+                    .filter((v) => v[`voiture_${trajet}_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom))} /> -->
+    {/snippet}
+    {#snippet bouton_ajout_voiture(typeTrajet)}
                     <button
                         onclick={() =>
                             toggleModal(AjoutVoiture, {
@@ -159,10 +149,12 @@
                                 titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                             })}
                     >Ajouter une voiture {typeTrajet}</button>
-                </div>
-
-
-                <div class="zone-voiture">
+    <!-- <button onclick={() => toggleModal(AjoutVoiture, {
+                        trajet,
+                        titreModal: `Ajouter voiture <span style='color: #7CC724'>${trajet}</span>`,
+                    })}>Ajouter voiture {trajet}</button> -->
+    {/snippet}
+    {#snippet participants_avec_voiture(typeTrajet)}
                 {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
                 <div>
 
@@ -193,12 +185,9 @@
                         >Ajouter passager</button>
                 </div>
                 {/each}
-                </div>
-            </div>
-            <div id="invisible-flex"></div>
-        </div>
-    {/each}
-</div>
+    {/snippet}
+</ZoneListes>
+
 
 <style lang="scss">
 
