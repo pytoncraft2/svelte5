@@ -185,18 +185,17 @@
                         {toggleModal}
                         bind:infos
                     />
-                </div>
-                        <!-- <button
+                        <button
                             onclick={() =>
                                 toggleModal(AjoutPassager, {
                                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                                 })}
-                        >Ajouter passager</button> -->
-
-    {/each}
+                        >Ajouter passager</button>
+                </div>
+                {/each}
                 </div>
             </div>
-            <!-- <div id="invisible-flex"></div> -->
+            <div id="invisible-flex"></div>
         </div>
     {/each}
 </div>
