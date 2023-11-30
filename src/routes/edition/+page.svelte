@@ -141,26 +141,24 @@
                         materiels={infos.materiels
                             .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                             .sort((a, b) => a.nom.localeCompare(b.nom))}
-                        titre="Participants sans voiture ({infos.participants.filter(
-                            (v) => v[`voiture_${typeTrajet}_id`] === null,
-                        ).length})"
-                        titreClass="liste-participants"
                         {typeTrajet}
                         bind:infos
                     />
                 </div>
-            <!-- <slot name="participants-sans-voiture"> -->
-                <!-- liste sans voitures -->
-            <!-- </slot> -->
 
             </div>
         </div>
 
             <div class="zone-bouton-voitures">
                 <div class="groupe-boutons ajouts">
-                    <slot name="bouton-ajout-voiture">
                         <!-- bouton ajout voiture -->
-                    </slot>
+                    <button
+                        onclick={() =>
+                            toggleModal(AjoutVoiture, {
+                                typeTrajet,
+                                titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
+                            })}
+                    >Ajouter une voiture {typeTrajet}</button>
                 </div>
 
 
