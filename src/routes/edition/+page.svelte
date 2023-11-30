@@ -159,7 +159,9 @@
 
                 <div class="zone-voiture">
                 {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
-                <span>{voiture.nom}</span>
+                <div>
+
+                <b>{voiture.nom}</b>
                     <Liste
                         items={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
@@ -171,6 +173,7 @@
                         {toggleModal}
                         bind:infos
                     />
+                </div>
                         <!-- <button
                             onclick={() =>
                                 toggleModal(AjoutPassager, {
