@@ -128,20 +128,27 @@
     <div class="groupe-liste" style="opacity: var(--container-opacity)">
         <div class="zone-participant-sans-voiture">
             <div class="liste">
-                <Liste
-                    items={infos.participants
-                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                        .sort((a, b) => a.nom.localeCompare(b.nom))}
-                    materiels={infos.materiels
-                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                        .sort((a, b) => a.nom.localeCompare(b.nom))}
-                    titre="Participants sans voiture ({infos.participants.filter(
+
+                <div>
+
+                <b>Participants sans voiture ({infos.participants.filter(
                         (v) => v[`voiture_${typeTrajet}_id`] === null,
-                    ).length})"
-                    titreClass="liste-participants"
-                    {typeTrajet}
-                    bind:infos
-                />
+                    ).length})</b>
+                    <Liste
+                        items={infos.participants
+                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                            .sort((a, b) => a.nom.localeCompare(b.nom))}
+                        materiels={infos.materiels
+                            .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                            .sort((a, b) => a.nom.localeCompare(b.nom))}
+                        titre="Participants sans voiture ({infos.participants.filter(
+                            (v) => v[`voiture_${typeTrajet}_id`] === null,
+                        ).length})"
+                        titreClass="liste-participants"
+                        {typeTrajet}
+                        bind:infos
+                    />
+                </div>
             <!-- <slot name="participants-sans-voiture"> -->
                 <!-- liste sans voitures -->
             <!-- </slot> -->
@@ -165,7 +172,6 @@
                     <Liste
                         items={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
-                        titre={voiture.nom}
                         nb_places={voiture.nb_places}
                         {index}
                         {typeTrajet}
