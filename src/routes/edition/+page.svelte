@@ -166,11 +166,12 @@
                 {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
                 <div>
 
+                    {console.log(voiture[`passagers_${typeTrajet}`])}
                 <b>{voiture.nom}</b>
-                <small>{voiture.nb_places} places</small>
+                <small>{infos.voitures[index][`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
                 <div class="carre-dispo">
                 {#each {length: voiture.nb_places} as _, i}
-                    {#if i > voiture.nb_places / 2}
+                    {#if i >= voiture.nb_places / 2}
                         <div class="voiture places-occupees"></div>
                         {:else}
                         <div class="voiture places-disponibles"></div>
