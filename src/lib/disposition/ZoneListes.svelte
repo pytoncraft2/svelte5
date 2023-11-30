@@ -1,14 +1,16 @@
 <script>
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets } = $props();
     let afficheSansVoiture = $state(true);
-    let afficheSansVoitureDisplay = $state(false);
+    let afficheTrajetCoteACote = $state(false);
+    // let afficheSansVoitureDisplay = $state(false);
 </script>
 <input type="checkbox" bind:checked={afficheSansVoiture} />
-<input type="checkbox" bind:checked={afficheSansVoitureDisplay} />
+<input type="checkbox" bind:checked={afficheTrajetCoteACote} />
+<!-- <input type="checkbox" bind:checked={afficheSansVoitureDisplay} /> -->
 
 <div class="zoneListes">
     {#each trajets as typeTrajet}
-    <div class="zoneListe">
+    <div class="zoneListe" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'}>
     <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
     <div class="groupe-liste" style="opacity: var(--container-opacity)">
         <div class="zone-participant-sans-voiture"
@@ -43,7 +45,7 @@
         display: flex;
         gap: 1em;
         justify-content: center;
-        flex-direction: var(--horizontale);
+        flex-direction: var(--trajet-cote-a-cote);
         // @media screen and (max-width: 888px) {
             // flex-direction: column;
         // }
