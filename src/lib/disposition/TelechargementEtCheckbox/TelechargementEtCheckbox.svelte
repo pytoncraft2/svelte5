@@ -1,23 +1,11 @@
 <script>
     let { afficheSansVoiture, afficheTrajetCoteACote } = $props();
-    // let config = {
-    //     "Afficher participant sans voiture": afficheSansVoiture,
-    //     "Trajets côte à côte": afficheTrajetCoteACote,
-    //     "Participant sans voiture en haut": false,
-    // };  
     function telechargement(e) {
         setTimeout(() => { window.print() }, 100);
     }
 </script>
 <div class="liste-checkbox">
     <div class="checkboxs">
-        <!-- {#each Object.keys(config) as key}
-            <label>
-                <input type="checkbox" bind:checked={config[key]} />
-                {key}
-            </label>
-        {/each} -->
-
         <label>
         <input type="checkbox" bind:checked={afficheSansVoiture} />
             Afficher participant sans voiture
