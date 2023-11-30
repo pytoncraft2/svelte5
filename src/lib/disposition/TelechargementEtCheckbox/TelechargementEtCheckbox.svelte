@@ -1,21 +1,31 @@
 <script>
-    let config = {
-        "Afficher participant sans voiture": true,
-        "Trajets côte à côte": false,
-        "Participant sans voiture en haut": false,
-    };  
+    let { afficheSansVoiture, afficheTrajetCoteACote } = $props();
+    // let config = {
+    //     "Afficher participant sans voiture": afficheSansVoiture,
+    //     "Trajets côte à côte": afficheTrajetCoteACote,
+    //     "Participant sans voiture en haut": false,
+    // };  
     function telechargement(e) {
         setTimeout(() => { window.print() }, 100);
     }
 </script>
 <div class="liste-checkbox">
     <div class="checkboxs">
-        {#each Object.keys(config) as key}
+        <!-- {#each Object.keys(config) as key}
             <label>
                 <input type="checkbox" bind:checked={config[key]} />
                 {key}
             </label>
-        {/each}
+        {/each} -->
+
+        <label>
+        <input type="checkbox" bind:checked={afficheSansVoiture} />
+            Afficher participant sans voiture
+        </label>
+        <label>
+            <input type="checkbox" bind:checked={afficheTrajetCoteACote} />
+            Trajets côte à côte
+        </label>
         <button onclick={telechargement} class="bouton" style="border:none; display: inline-flex"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAS0lEQVR4nGNgGEngPxoetQAD/B8NIkLg/2gQoYNyLMGCC9cz0NCSenINJ8aSekoNx2cJ1QzHZgnVDYeBBigeBbQB/6mM6W8Bw5AEAO/6b2XgFcy5AAAAAElFTkSuQmCC" alt="telecharger">Télécharger</button>
     </div>
 </div>

@@ -6,7 +6,6 @@
     import AjoutPassager from "./form/AjoutPassager.svelte";
     import AjoutVoiture from "./form/AjoutVoiture.svelte";
     import BandeauInfo from "$lib/BandeauInfo.svelte";
-    import TelechargementEtCheckbox from "$lib/disposition/TelechargementEtCheckbox/TelechargementEtCheckbox.svelte";
     import Liste from "../../lib/liste/Liste.svelte";
     import ZoneListes from "../../lib/disposition/ZoneListes.svelte"
     import {selectedItems} from "$lib/selectionStore";
@@ -66,7 +65,6 @@
 
 </script>
 <BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
-<TelechargementEtCheckbox />
 <ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(typeTrajet)}
         <div>

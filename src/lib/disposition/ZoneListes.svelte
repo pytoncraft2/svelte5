@@ -1,11 +1,14 @@
 <script>
+    import TelechargementEtCheckbox from "./TelechargementEtCheckbox/TelechargementEtCheckbox.svelte";
+
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets } = $props();
     let afficheSansVoiture = $state(true);
     let afficheTrajetCoteACote = $state(false);
     // let afficheSansVoitureDisplay = $state(false);
 </script>
-<input type="checkbox" bind:checked={afficheSansVoiture} />
-<input type="checkbox" bind:checked={afficheTrajetCoteACote} />
+<TelechargementEtCheckbox bind:afficheSansVoiture bind:afficheTrajetCoteACote/>
+<!-- <input type="checkbox" bind:checked={afficheSansVoiture} />
+<input type="checkbox" bind:checked={afficheTrajetCoteACote} /> -->
 <!-- <input type="checkbox" bind:checked={afficheSansVoitureDisplay} /> -->
 
 <div class="zoneListes" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'}>
