@@ -168,6 +168,15 @@
 
                 <b>{voiture.nom}</b>
                 <small>{voiture.nb_places} places</small>
+                <div class="voiture"></div>
+                <div class="voiture"></div>
+                <div class="voiture"></div>
+                <div class="dispo">
+                    <div class="carre"></div>
+                    <div class="carre"></div>
+                    <div class="carre"></div>
+                    <div class="carre"></div>
+                </div>
                     <Liste
                         passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
@@ -193,6 +202,96 @@
 </div>
 
 <style lang="scss">
+        .voiture {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .places-disponibles::before {
+            content: "";
+            display: inline-block;
+            width: 20px; /* Ajustez la taille des petits carrés selon vos préférences */
+            height: 20px;
+            margin: 0 2px; /* Espace entre les carrés */
+            background-color: #4CAF50; /* Couleur pour les places disponibles */
+        }
+
+        .places-occupees::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 2px;
+            background-color: #FFC107; /* Couleur pour les places occupées */
+        }
+
+        /* Ajustez le nombre de petits carrés générés en fonction du pourcentage d'occupation */
+        .voiture[data-places="4/6"] .places-disponibles::before:nth-child(n+5),
+        .voiture[data-places="4/6"] .places-occupees::before:nth-child(-n+4) {
+            background-color: #FFC107; /* Couleur pour les places occupées dans le cas spécifique de 4 places disponibles sur 6 */
+        }
+        
+
+        /* Pour indiquer visuellement la différence entre les places disponibles et occupées, vous pouvez utiliser une bordure autour de chaque carré */
+        .places-disponibles::before,
+        .places-occupees::before {
+            border: 1px solid #ccc;
+        }
+
+        /* Pour créer un contour autour de chaque petit carré */
+        .dispo {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 2px;
+            border: 1px solid #ccc;
+            position: absolute;
+            // top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .carre {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .voiture::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: 0 2px;
+            border: 1px solid #ccc;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+
+
+
+
+
+
+
+
     h2 {
         text-align: center;
     }
