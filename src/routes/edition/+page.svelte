@@ -10,23 +10,10 @@
     import Liste from "../../lib/liste/Liste.svelte";
     import ZoneListes from "../../lib/disposition/ZoneListes.svelte"
     import {selectedItems} from "$lib/selectionStore";
+    import previsualisationInfo from "./previsualisationInfo";
 
     let id = $state();
-    let infos = $state({
-    "titre": "Chargement...",
-    "loading": true,
-    "voitures": [],
-    "participants": [],
-    "materiels": [],
-    "description": "...",
-    "lieu_depart": "...",
-    "lieu_depart_info": "...",
-    "lieu_destination": "...",
-    "lieu_destination_info": "...",
-    "trajets": "aller/retour",
-    "date_depart": "...",
-    "date_retour": "..."
-});
+    let infos = $state(previsualisationInfo);
     let showModal = $state(false);
     let modalContent = $state()
     let modalData = $state();
@@ -96,13 +83,13 @@
         {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index (voiture.id)}
         <div>
             <h5 onclick={(e) => deplacement(index, 'lalalal', trajet, voiture)}>{voiture.nom}</h5>
-            <Liste items={voiture[`passagers_${trajet}`]} />
+            <!-- <Liste items={voiture[`passagers_${trajet}`]} /> -->
+            <Liste items={voiture[`passagers_retour`]} />
+            <h1>ROI::{voiture.nom}</h1>
             <button onclick={() =>
                 toggleModal(AjoutPassager, {
                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                 })}>Ajouter passager</button>
-            <Liste items={infos.voitures[index][`materiels_${trajet}`]} />
-            <button>Ajouter Materiel</button>
         </div>
         {/each}
     {/snippet}
