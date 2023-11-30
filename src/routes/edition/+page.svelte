@@ -167,10 +167,10 @@
                 <div>
 
                 <b>{voiture.nom}</b>
+                <small>{voiture.nb_places} places</small>
                     <Liste
                         items={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
-                        nb_places={voiture.nb_places}
                         {index}
                         {typeTrajet}
                         {voiture}
