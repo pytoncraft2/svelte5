@@ -9,6 +9,7 @@
     <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
     <div class="groupe-liste" style="opacity: var(--container-opacity)">
         <div class="zone-participant-sans-voiture">
+            <h5 style="text-align: center;">Participants sans voiture</h5>
             <div class="liste">
                 <!-- liste sans voitures -->
                 {@render participants_sans_voiture(typeTrajet)}
@@ -43,7 +44,6 @@
             align-items: center;
             border: 1px solid #000;
             padding: 10px;
-            margin-left: 25%;
         }
 
         .bar-text span {
