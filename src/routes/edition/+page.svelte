@@ -11,6 +11,7 @@
     import ZoneListes from "../../lib/disposition/ZoneListes.svelte"
     import {selectedItems} from "$lib/selectionStore";
     import previsualisationInfo from "./previsualisationInfo";
+    import TitreVoiture from "../../lib/disposition/TitreVoiture.svelte";
 
     let id = $state();
     let infos = $state(previsualisationInfo);
@@ -69,9 +70,9 @@
 <ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(typeTrajet)}
         <div>
-        <b>Participants sans voiture ({infos.participants.filter(
+            <TitreVoiture titre={`Participants sans voiture (${infos.participants.filter(
                 (v) => v[`voiture_${typeTrajet}_id`] === null,
-            ).length})</b>
+            ).length})`} {infos}/>
             <Liste
                 passagers={infos.participants
                     .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
@@ -95,17 +96,7 @@
     {#snippet participants_avec_voiture(typeTrajet)}
         {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
             <div>
-                <b>{voiture.nom}</b>
-                <small>{infos.voitures[index][`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
-                <div class="carre-dispo">
-                {#each {length: voiture.nb_places} as _, i}
-                    {#if i >= infos.voitures[index][`passagers_${typeTrajet}`].length }
-                        <div class="voiture places-occupees"></div>
-                        {:else}
-                        <div class="voiture places-disponibles"></div>
-                    {/if}
-                {/each}
-                </div>
+                <TitreVoiture titre={voiture.nom} {voiture} {infos} {typeTrajet} {index}/>
                     <Liste
                         passagers={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
