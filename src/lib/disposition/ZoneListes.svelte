@@ -1,8 +1,10 @@
 <script>
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets } = $props();
-    let afficheSansVoiture = $state(false);
+    let afficheSansVoiture = $state(true);
+    let afficheSansVoitureDisplay = $state(false);
 </script>
 <input type="checkbox" bind:checked={afficheSansVoiture} />
+<input type="checkbox" bind:checked={afficheSansVoitureDisplay} />
 
 <div class="zoneListes">
     {#each trajets as typeTrajet}
@@ -10,7 +12,8 @@
     <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
     <div class="groupe-liste" style="opacity: var(--container-opacity)">
         <div class="zone-participant-sans-voiture"
-        style:--bg-1={afficheSansVoiture ? 'red' : 'blue'}>
+        style:--sans-voiture={afficheSansVoiture ? 'auto' : '540px'}
+        style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}>
             <div class="liste">
                 <!-- liste sans voitures -->
                 {@render participants_sans_voiture(typeTrajet)}
@@ -65,9 +68,8 @@
     }
 
     :global(.zone-participant-sans-voiture) {
-        max-width: var(--z-participant-sv);
-        display: var(--z-participant-display);
-        background: var(--bg-1);
+        max-width: var(--sans-voiture);
+        display: var(--sans-voiture-display);
     }
 
 
