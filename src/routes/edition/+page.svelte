@@ -70,9 +70,9 @@
 
 </ZoneListes> -->
 <!-- <ZoneTrajets> -->
-    {#each infos.trajets.split("/") as typeTrajet}
+    <!-- {#each infos.trajets.split("/") as typeTrajet} -->
         <!-- <ZoneListes {typeTrajet}> -->
-            <Liste
+            <!-- <Liste
                 items={infos.participants
                     .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
                     .sort((a, b) => a.nom.localeCompare(b.nom))}
@@ -92,11 +92,11 @@
                             typeTrajet,
                             titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
                         })}
-                >Ajouter une voiture {typeTrajet}</button>
+                >Ajouter une voiture {typeTrajet}</button> -->
 
             <!-- <ListeVoitures> -->
-                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
-                    <Liste
+                <!-- {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)} -->
+                    <!-- <Liste
                         items={infos.voitures[index][`passagers_${typeTrajet}`]}
                         materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
                         titre={voiture.nom}
@@ -113,40 +113,77 @@
                                     titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
                                 })}
                         >Ajouter passager</button>
-                    </Liste>
-                {/each}
+                    </Liste> -->
+                <!-- {/each} -->
             <!-- </ListeVoitures> -->
         <!-- </ZoneListes> -->
-    {/each}
+    <!-- {/each} -->
 <!-- </ZoneTrajets> -->
+
+
 <div class="zoneListes">
-<h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
-<div class="groupe-liste" style="opacity: var(--container-opacity)">
-    <div class="zone-participant-sans-voiture">
-        <div class="liste">
-        <slot name="participants-sans-voiture">
-            <!-- liste sans voitures -->
-		</slot>
+{#each infos.trajets.split("/") as typeTrajet}
 
-        </div>
-    </div>
+    <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
+    <div class="groupe-liste" style="opacity: var(--container-opacity)">
+        <div class="zone-participant-sans-voiture">
+            <div class="liste">
+                <Liste
+                    items={infos.participants
+                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                        .sort((a, b) => a.nom.localeCompare(b.nom))}
+                    materiels={infos.materiels
+                        .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                        .sort((a, b) => a.nom.localeCompare(b.nom))}
+                    titre="Participants sans voiture ({infos.participants.filter(
+                        (v) => v[`voiture_${typeTrajet}_id`] === null,
+                    ).length})"
+                    titreClass="liste-participants"
+                    {typeTrajet}
+                    bind:infos
+                />
+            <!-- <slot name="participants-sans-voiture"> -->
+                <!-- liste sans voitures -->
+            <!-- </slot> -->
 
-        <div class="zone-bouton-voitures">
-            <div class="groupe-boutons ajouts">
-                <slot name="bouton-ajout-voiture">
-                    <!-- bouton ajout voiture -->
-                </slot>
             </div>
+        </div>
 
-
-            <div class="zone-voiture">
-                    <slot name="participants-avec-voiture">
-                        <!-- liste des voitures -->
+            <div class="zone-bouton-voitures">
+                <div class="groupe-boutons ajouts">
+                    <slot name="bouton-ajout-voiture">
+                        <!-- bouton ajout voiture -->
                     </slot>
+                </div>
+
+
+                <div class="zone-voiture">
+                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
+                <span>{voiture.nom}</span>
+                    <Liste
+                        items={infos.voitures[index][`passagers_${typeTrajet}`]}
+                        materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
+                        titre={voiture.nom}
+                        nb_places={voiture.nb_places}
+                        {index}
+                        {typeTrajet}
+                        {voiture}
+                        {toggleModal}
+                        bind:infos
+                    />
+                        <!-- <button
+                            onclick={() =>
+                                toggleModal(AjoutPassager, {
+                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                                })}
+                        >Ajouter passager</button> -->
+
+    {/each}
+                </div>
             </div>
+            <!-- <div id="invisible-flex"></div> -->
         </div>
-        <!-- <div id="invisible-flex"></div> -->
-    </div>
+    {/each}
 </div>
 
 <style lang="scss">
