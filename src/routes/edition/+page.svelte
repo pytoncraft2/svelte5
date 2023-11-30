@@ -170,7 +170,7 @@
                 <small>{voiture.nb_places} places</small>
                 <div class="carre-dispo">
                 {#each {length: voiture.nb_places} as _, i}
-                    <div class="voiture"></div>
+                    <div class="voiture places-occupees"></div>
                 {/each}
                 </div>
                     <Liste
@@ -228,7 +228,6 @@
             display: inline-block;
             width: 20px;
             height: 20px;
-            margin: 0 2px;
             background-color: #FFC107; /* Couleur pour les places occupées */
         }
 
