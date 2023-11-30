@@ -170,7 +170,11 @@
                 <small>{voiture.nb_places} places</small>
                 <div class="carre-dispo">
                 {#each {length: voiture.nb_places} as _, i}
-                    <div class="voiture places-occupees"></div>
+                    {#if i > voiture.nb_places / 2}
+                        <div class="voiture places-occupees"></div>
+                        {:else}
+                        <div class="voiture places-disponibles"></div>
+                    {/if}
                 {/each}
                 </div>
                     <Liste
