@@ -64,10 +64,8 @@
     }
 
 </script>
+<div>
 
-<BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
-<TelechargementEtCheckbox />
-<ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(trajet)}
     <Liste items={infos.participants
                     .filter((v) => v[`voiture_${trajet}_id`] === null)
@@ -79,6 +77,7 @@
                         titreModal: `Ajouter voiture <span style='color: #7CC724'>${trajet}</span>`,
                     })}>Ajouter voiture {trajet}</button>
     {/snippet}
+
     {#snippet participants_avec_voiture(trajet)}
         {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index (voiture.id)}
         <div>
@@ -93,6 +92,11 @@
         </div>
         {/each}
     {/snippet}
+</div>
+<BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
+<TelechargementEtCheckbox />
+<ZoneListes trajets={infos.trajets.split("/")}>
+
 </ZoneListes>
 
 <Modal bind:showModal {modalContent} {modalData} {infos} />
