@@ -1,7 +1,7 @@
 <script>
 	import {activeZoneId, selectedItems} from "$lib/selectionStore";
 	let zoneId = `zone-${Math.floor(Math.random() * 1000000)}`;
-	let { passagers, personne } = $props();
+	let { passagers } = $props();
 	function handleMaybeSelect(id, e) {
         console.log("HANDLE");
 		if ($activeZoneId !== zoneId) {

@@ -66,59 +66,6 @@
 </script>
 <BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
 <TelechargementEtCheckbox />
-<!-- <ZoneListes trajets={infos.trajets.split("/")}>
-
-</ZoneListes> -->
-<!-- <ZoneTrajets> -->
-    <!-- {#each infos.trajets.split("/") as typeTrajet} -->
-        <!-- <ZoneListes {typeTrajet}> -->
-            <!-- <Liste
-                items={infos.participants
-                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))}
-                materiels={infos.materiels
-                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))}
-                titre="Participants sans voiture ({infos.participants.filter(
-                    (v) => v[`voiture_${typeTrajet}_id`] === null,
-                ).length})"
-                titreClass="liste-participants"
-                {typeTrajet}
-                bind:infos
-            />
-                <button
-                    onclick={() =>
-                        toggleModal(AjoutVoiture, {
-                            typeTrajet,
-                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
-                        })}
-                >Ajouter une voiture {typeTrajet}</button> -->
-
-            <!-- <ListeVoitures> -->
-                <!-- {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)} -->
-                    <!-- <Liste
-                        items={infos.voitures[index][`passagers_${typeTrajet}`]}
-                        materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
-                        titre={voiture.nom}
-                        nb_places={voiture.nb_places}
-                        {index}
-                        {typeTrajet}
-                        {voiture}
-                        {toggleModal}
-                        bind:infos
-                    >
-                        <button
-                            onclick={() =>
-                                toggleModal(AjoutPassager, {
-                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                                })}
-                        >Ajouter passager</button>
-                    </Liste> -->
-                <!-- {/each} -->
-            <!-- </ListeVoitures> -->
-        <!-- </ZoneListes> -->
-    <!-- {/each} -->
-<!-- </ZoneTrajets> -->
 <ZoneListes trajets={infos.trajets.split("/")}>
     {#snippet participants_sans_voiture(typeTrajet)}
         <div>
@@ -167,19 +114,16 @@
                         {toggleModal}
                         bind:infos
                     />
-                    <button
-                        onclick={() =>
-                            toggleModal(AjoutPassager, {
-                                titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                            })}
-                    >Ajouter passager</button>
+                    <button onclick={() =>
+                        toggleModal(AjoutPassager, {
+                            titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                        })}>Ajouter passager</button>
             </div>
         {/each}
     {/snippet}
 </ZoneListes>
 
-
-<style lang="scss">
+<!-- <style lang="scss">
 
     .carre-dispo {
         display: flex;
@@ -381,14 +325,10 @@
         }        
     }
 
-    // .zoneListes {
-    //     max-width: 540px;
-    // }
-
-</style>
+</style> -->
 <Modal bind:showModal {modalContent} {modalData} {infos} />
 
-<!-- <style lang="scss">
+<style lang="scss">
     #t {
         display: flex;
         gap: 1em;
@@ -422,65 +362,4 @@
         display: var(--z-participant-display);
     }
 
-</style> -->
-<!-- <ZoneTrajets>
-    {#each infos.trajets.split("/") as typeTrajet}
-        <ZoneListes {typeTrajet}>
-            <ListeParticipants
-                slot="participants-sans-voiture"
-                items={infos.participants
-                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))}
-                materiels={infos.materiels
-                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))}
-                titre="Participants sans voiture ({infos.participants.filter(
-                    (v) => v[`voiture_${typeTrajet}_id`] === null,
-                ).length})"
-                titreClass="liste-participants"
-                {typeTrajet}
-                {dragDisabled}
-                bind:infos
-            />
-                <Bouton
-                    texte="Ajouter une voiture {typeTrajet} 🚘"
-                    slot="bouton-ajout-voiture"
-                    --bouton-largeur="auto"
-                    {visible}
-                    on:click={() =>
-                        toggleModal(AjoutVoiture, {
-                            typeTrajet,
-                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
-                        })}
-                />
-
-            <ListeVoitures slot="participants-avec-voiture">
-                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
-                    <ListeParticipants
-                        items={infos.voitures[index][`passagers_${typeTrajet}`]}
-                        materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
-                        titre={voiture.nom}
-                        nb_places={voiture.nb_places}
-                        {index}
-                        {typeTrajet}
-                        {voiture}
-                        {toggleModal}
-                        {dragDisabled}
-                        bind:infos
-                    >
-                        <Bouton
-                            slot="bouton-ajout-passager"
-                            texte="Ajouter passager"
-                            --bouton-largeur="100%"
-                            {visible}
-                            on:click={() =>
-                                toggleModal(AjoutPassager, {
-                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                                })}
-                        />
-                    </ListeParticipants>
-                {/each}
-            </ListeVoitures>
-        </ZoneListes>
-    {/each}
-</ZoneTrajets> -->
+</style>
