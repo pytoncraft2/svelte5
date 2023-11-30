@@ -64,40 +64,63 @@
     }
 
 </script>
-<div>
-
-    {#snippet participants_sans_voiture(trajet)}
-    <Liste items={infos.participants
-                    .filter((v) => v[`voiture_${trajet}_id`] === null)
-                    .sort((a, b) => a.nom.localeCompare(b.nom))} />
-    {/snippet}
-    {#snippet bouton_ajout_voiture(trajet)}
-    <button onclick={() => toggleModal(AjoutVoiture, {
-                        trajet,
-                        titreModal: `Ajouter voiture <span style='color: #7CC724'>${trajet}</span>`,
-                    })}>Ajouter voiture {trajet}</button>
-    {/snippet}
-
-    {#snippet participants_avec_voiture(trajet)}
-        {#each infos.voitures.filter((v) => v.trajets === trajet) as voiture, index (voiture.id)}
-        <div>
-            <h5 onclick={(e) => deplacement(index, 'lalalal', trajet, voiture)}>{voiture.nom}</h5>
-            <!-- <Liste items={voiture[`passagers_${trajet}`]} /> -->
-            <Liste items={voiture[`passagers_retour`]} />
-            <h1>ROI::{voiture.nom}</h1>
-            <button onclick={() =>
-                toggleModal(AjoutPassager, {
-                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
-                })}>Ajouter passager</button>
-        </div>
-        {/each}
-    {/snippet}
-</div>
 <BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
 <TelechargementEtCheckbox />
-<ZoneListes trajets={infos.trajets.split("/")}>
+<!-- <ZoneListes trajets={infos.trajets.split("/")}>
 
-</ZoneListes>
+</ZoneListes> -->
+<!-- <ZoneTrajets> -->
+    {#each infos.trajets.split("/") as typeTrajet}
+        <!-- <ZoneListes {typeTrajet}> -->
+            <Liste
+                items={infos.participants
+                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom))}
+                materiels={infos.materiels
+                    .filter((v) => v[`voiture_${typeTrajet}_id`] === null)
+                    .sort((a, b) => a.nom.localeCompare(b.nom))}
+                titre="Participants sans voiture ({infos.participants.filter(
+                    (v) => v[`voiture_${typeTrajet}_id`] === null,
+                ).length})"
+                titreClass="liste-participants"
+                {typeTrajet}
+                bind:infos
+            />
+                <Bouton
+                    texte="Ajouter une voiture {typeTrajet} 🚘"
+                    on:click={() =>
+                        toggleModal(AjoutVoiture, {
+                            typeTrajet,
+                            titreModal: `Ajouter voiture <span style='color: #7CC724'>${typeTrajet}</span>`,
+                        })}
+                />
+
+            <!-- <ListeVoitures> -->
+                {#each infos.voitures.filter((v) => v.trajets === typeTrajet) as voiture, index (voiture.id)}
+                    <ListeParticipants
+                        items={infos.voitures[index][`passagers_${typeTrajet}`]}
+                        materiels={infos.voitures[index][`materiels_${typeTrajet}`]}
+                        titre={voiture.nom}
+                        nb_places={voiture.nb_places}
+                        {index}
+                        {typeTrajet}
+                        {voiture}
+                        {toggleModal}
+                        bind:infos
+                    >
+                        <Bouton
+                            texte="Ajouter passager"
+                            on:click={() =>
+                                toggleModal(AjoutPassager, {
+                                    titreModal: `Ajouter passager dans<br><span style='color: #006699'>${voiture.nom}</span>`,
+                                })}
+                        />
+                    </ListeParticipants>
+                {/each}
+            <!-- </ListeVoitures> -->
+        <!-- </ZoneListes> -->
+    {/each}
+<!-- </ZoneTrajets> -->
 
 <Modal bind:showModal {modalContent} {modalData} {infos} />
 
