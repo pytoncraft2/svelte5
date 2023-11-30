@@ -167,10 +167,10 @@
                 <div>
 
                 <b>{voiture.nom}</b>
-                <small>{voiture[`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
+                <small>{infos.voitures[index][`passagers_${typeTrajet}`].length}/{voiture.nb_places} places</small>
                 <div class="carre-dispo">
                 {#each {length: voiture.nb_places} as _, i}
-                    {#if i >= voiture[`passagers_${typeTrajet}`].length }
+                    {#if i >= infos.voitures[index][`passagers_${typeTrajet}`].length }
                         <div class="voiture places-occupees"></div>
                         {:else}
                         <div class="voiture places-disponibles"></div>
