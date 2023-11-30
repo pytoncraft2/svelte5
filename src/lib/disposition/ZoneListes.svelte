@@ -34,7 +34,7 @@
                     {@render participants_avec_voiture(typeTrajet)}
                 </div>
             </div>
-            <div id="invisible-flex"></div>
+            <div class="invisible-flex" style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}></div>
         </div>
     </div>
 {/each}
@@ -51,9 +51,9 @@
         // }
     }
 
-    // :global(#invisible-flex) {
-    //     display: var(--invisible);
-    // }
+    :global(.invisible-flex) {
+        display: var(--sans-voiture-display);
+    }
 
     // :global(.liste) {
         // display: var(--liste) !important;
@@ -190,7 +190,7 @@
             flex-direction: column;
         }
 
-    #invisible-flex {
+    .invisible-flex {
         flex: 1;
         @media only screen and (max-width: 1440px) {
             display: none;
