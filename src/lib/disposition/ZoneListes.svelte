@@ -4,14 +4,21 @@
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets } = $props();
     let afficheSansVoiture = $state(true);
     let afficheTrajetCoteACote = $state(false);
+    let afficheParticipantEnHaut = $state(false);
     // let afficheSansVoitureDisplay = $state(false);
 </script>
-<TelechargementEtCheckbox bind:afficheSansVoiture bind:afficheTrajetCoteACote/>
+<TelechargementEtCheckbox bind:afficheSansVoiture bind:afficheTrajetCoteACote bind:afficheParticipantEnHaut/>
 <div class="zoneListes" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'}>
     {#each trajets as typeTrajet}
     <div class="zoneListe" >
     <h2 id="{typeTrajet}" class="bar-text" style="opacity: var(--container-opacity)"><span>Trajet {typeTrajet}</span></h2>
-    <div class="groupe-liste" style="opacity: var(--container-opacity)">
+    <div class="groupe-liste" 
+    style="opacity: var(--container-opacity)"
+    style:--participant-en-haut={afficheSansVoiture &&
+    afficheTrajetCoteACote
+        ? "column"
+        : afficheParticipantEnHaut ? "column" : "row"}
+    >
         <div class="zone-participant-sans-voiture"
         style:--sans-voiture={afficheSansVoiture ? 'auto' : '540px'}
         style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}>
@@ -65,7 +72,7 @@
     }
 
     .groupe-liste {
-        flex-direction: var(--p-haut);
+        flex-direction: var(--participant-en-haut);
     }
 
     .zone-participant-sans-voiture {
