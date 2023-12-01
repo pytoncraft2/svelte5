@@ -11,6 +11,6 @@ export default
     "lieu_destination": "...",
     "lieu_destination_info": "...",
     "trajets": "aller/retour",
-    "date_depart": "...",
-    "date_retour": "..."
+    "date_depart": "2023-12-09T00:00:00",
+    "date_retour": "2023-12-09T00:00:00"
 }

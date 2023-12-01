@@ -41,7 +41,7 @@
 					{#if infos.trajets.split("/").includes("aller")}
 						<button class="lieu-info-item" value="aller" on:click|preventDefault={scrollIntoView}>
 							<div class="lieu-info-titre">
-								Trajet Aller {infos.date_depart || ''}
+								Trajet Aller <input type="datetime-local" value="{infos.date_depart}"> 
 							</div>
 							<p class="b">{infos.lieu_depart || ''}</p>
 							<p>{infos.lieu_depart_info || ''}</p>
@@ -50,7 +50,7 @@
 					{#if infos.trajets.split("/").includes("retour")}
 						<button class="lieu-info-item" on:click|preventDefault={scrollIntoView} value="retour">
 							<div class="lieu-info-titre">
-								Trajet Retour {infos.date_retour || ''}
+								Trajet Retour <input type="datetime-local" value="{infos.date_retour }">
 							</div>
 							<p class="b">{infos.lieu_destination || ''}</p>
 							<p>{infos.lieu_destination_info || ''}</p>
@@ -141,6 +141,8 @@
 	.lieu-info-titre {
 		color: hsl(200, 100%, 30%);
 		font-weight: bold;
+		display: flex;
+		flex-direction: column;
 	}
 
 	.collapse__header {
