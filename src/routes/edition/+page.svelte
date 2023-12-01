@@ -2,15 +2,15 @@
     import { page } from "$app/stores";
     import { browser } from "$app/environment";
     import { GET, PUT } from "$lib/utils";
-    import Modal from "$lib/modal/Modal.svelte";
+    import Modal from "$lib/Modal.svelte";
     import AjoutPassager from "./form/AjoutPassager.svelte";
     import AjoutVoiture from "./form/AjoutVoiture.svelte";
     import BandeauInfo from "$lib/BandeauInfo.svelte";
-    import Liste from "../../lib/liste/Liste.svelte";
-    import ZoneListes from "../../lib/disposition/ZoneListes.svelte"
+    import Liste from "$lib/Liste.svelte";
+    import ZoneListes from "$lib/disposition/ZoneListes.svelte"
     import {selectedItems} from "$lib/selectionStore";
     import previsualisationInfo from "./previsualisationInfo";
-    import TitreVoiture from "../../lib/disposition/TitreVoiture.svelte";
+    import TitreVoiture from "$lib/disposition/TitreVoiture.svelte";
 
     let id = $state();
     let infos = $state(previsualisationInfo);

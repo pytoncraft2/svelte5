@@ -20,13 +20,9 @@
 <article>
 	<section  class="places">
 		{#each passagers as item(item.id)}
-			<!-- <div class:selected={Object.keys($selectedItems).includes(`${item.id}`)} on:click={(e) => handleMaybeSelect(item.id, e)} on:keydown on:keyup role="button" tabindex="{item.id}"> -->
             <div class:selected={Object.keys($selectedItems).includes(`${item.id}`)} on:click={(e) => handleMaybeSelect(item.id, e)} on:keydown on:keyup role="button" tabindex="{item.id}">
 				<div class="objet-draggable">
-                    <!-- {@render liste_participants(item[`passagers_aller`])} -->
 					<span>{item.nom || item.name}</span>
-
-					<!-- <span>{item.nom || item.name}</span> -->
 				</div>
 			</div>
 		{/each}
