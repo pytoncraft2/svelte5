@@ -1,9 +1,9 @@
 <script>
     import { selectedItems } from "$lib/selectionStore";
     import { PUT } from "$lib/utils";
-    export let modalData;
-    export let infos;
-    $: ({ titreModal } = modalData)
+    let { modalData, infos } = $props();
+    let { titreModal } = $derived(modalData);
+
     function ajoutOuSauvegardePassager(e) {
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData.entries());

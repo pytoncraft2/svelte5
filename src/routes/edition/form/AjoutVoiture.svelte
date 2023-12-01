@@ -1,8 +1,7 @@
 <script>
     import { POST } from "$lib/utils";
-    export let modalData;
-    export let infos;
-    $: ({ typeTrajet, voiture, titreModal } = modalData)
+    let { modalData, infos } = $props();
+    let { typeTrajet, voiture, titreModal } = $derived(modalData);
 
     function sauvegarderModifierVoiture(e, typeTrajet) {
         const formData = new FormData(e.target);

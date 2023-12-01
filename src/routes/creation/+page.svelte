@@ -11,17 +11,17 @@
 
     let titreRef;
     let descriptionInputRef;
-    let listePersonnes = [];
-    let listeMatos = [];
-    let matosValeur = "";
-    let personneValeur = "";
+    let listePersonnes = $state([]);
+    let listeMatos = $state([]);
+    let matosValeur = $state("");
+    let personneValeur = $state("");
 
     let titre = "";
     let textareaPlaceholder =
     "(Un participant sur chaque ligne)\n\nExemple: \n\nRobert Baden-Powell\nMadeleine Martel\nNoé Lavoie\nElaine Beaulieu\nCésar Firmin";
-    let multiSaisie = true;
-    let id;
-    let donnesPrecharge;
+    let multiSaisie = $state(true);
+    let id = $state();
+    let donnesPrecharge = $state();
 
 	$effect(() => {
         const searchParams = browser && $page.url.searchParams;
