@@ -25,16 +25,18 @@
 
 	.places-disponibles {
 		display: inline-block;
-		width: 15px;
+		width: auto;
 		height: 15px;
 		border: 1px solid #ccc;
-		margin: 0 2px;
-		background-color: #ffc107;
+		margin: 2px;
+		/* background-color: #ffc107; */
+		background-color: #ffc1071c;
+		background-color: #ffc10721;
 	}
     .carre-dispo {
         display: flex;
         flex-direction: column;
-        gap: 2px;
+        /* gap: 2px; */
     }
     /* .voiture {
         width: 20px;
