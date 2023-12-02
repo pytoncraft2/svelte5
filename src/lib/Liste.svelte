@@ -22,7 +22,7 @@
 		{#each passagers as item(item.id)}
             <div class:selected={Object.keys($selectedItems).includes(`${item.id}`)} on:click={(e) => handleMaybeSelect(item.id, e)} on:keydown on:keyup role="button" tabindex="{item.id}">
 				<div class="objet-draggable">
-					<span>{item.nom || item.name}</span>
+					<div class="places-occupees"></div><span>{item.nom || item.name}</span>
 				</div>
 			</div>
 		{/each}
@@ -35,5 +35,14 @@
 		background: hsl(200, 100%, 30%);
 		opacity: 0.9;
 		color: white;
+	}
+
+	.places-occupees {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border: 1px solid #ccc;
+		margin: 0 2px;
+		background-color: #4caf50;
 	}
 </style>
