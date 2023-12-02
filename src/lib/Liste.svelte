@@ -45,4 +45,14 @@
 		margin: 0 2px;
 		background-color: #4caf50;
 	}
+
+	.objet-draggable {
+		display: flex;
+		justify-content: start;
+		align-items: center;
+	}
+
+	:global(.zone-participant-sans-voiture .places-occupees) {
+		background: #d20000;
+	}
 </style>

@@ -10,21 +10,33 @@
             .length}/{voiture.nb_places} places</small
     >
     <div class="carre-dispo">
-        {#each { length: voiture.nb_places } as _, i}
-            {#if i >= infos.voitures[index][`passagers_${typeTrajet}`].length}
-                <div class="voiture places-occupees"></div>
-            {:else}
-                <div class="voiture places-disponibles"></div>
-            {/if}
+        {#each { length: voiture.nb_places - infos.voitures[index][`passagers_${typeTrajet}`]
+            .length } as _, i}
+            <!-- {#if i >= infos.voitures[index][`passagers_${typeTrajet}`].length} -->
+                <div class="places-disponibles"></div>
+            <!-- {:else} -->
+                <!-- <div class="voiture places-disponibles"></div> -->
+            <!-- {/if} -->
         {/each}
     </div>
 {/if}
 
 <style>
+
+	.places-disponibles {
+		display: inline-block;
+		width: 15px;
+		height: 15px;
+		border: 1px solid #ccc;
+		margin: 0 2px;
+		background-color: #ffc107;
+	}
     .carre-dispo {
         display: flex;
+        flex-direction: column;
+        gap: 2px;
     }
-    .voiture {
+    /* .voiture {
         width: 20px;
         height: 35px;
         display: flex;
@@ -63,5 +75,5 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: -1;
-    }
+    } */
 </style>
