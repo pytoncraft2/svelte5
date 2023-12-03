@@ -26,11 +26,12 @@
 	.places-disponibles {
 		display: inline-block;
 		width: auto;
+        max-width: 111px;
 		height: 15px;
 		border: 1px solid #ccc;
 		margin: 2px;
 		/* background-color: #ffc107; */
-		background-color: #ffc1071c;
+		/* background-color: #ffc1071c; */
 		background-color: #ffc10721;
 	}
     .carre-dispo {

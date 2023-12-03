@@ -40,7 +40,7 @@
                     {@render participants_avec_voiture(typeTrajet)}
                 </div>
             </div>
-            <div class="invisible-flex" style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}></div>
+            <!-- <div class="invisible-flex" style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}></div> -->
         </div>
     </div>
 {/each}
@@ -79,6 +79,7 @@
         max-width: var(--sans-voiture);
         display: var(--sans-voiture-display);
     }
+
 
 
 
@@ -156,8 +157,8 @@
         position: sticky;
         top: 0;
         width: 100%;
-        display: flex;
-        justify-content: center;
+        // display: flex;
+        // justify-content: center;
         @media screen and (max-width: 480px) {
             width: 100%;
         }

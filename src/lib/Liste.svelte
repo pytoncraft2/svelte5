@@ -30,7 +30,7 @@
 </article>
 
 
-<style>
+<style lang="scss">
 	.selected {
 		background: hsl(200, 100%, 30%);
 		opacity: 0.9;
@@ -54,5 +54,12 @@
 
 	:global(.zone-participant-sans-voiture .places-occupees) {
 		background: #d20000;
+	}
+	:global(.zone-participant-sans-voiture .liste) {
+		column-count: 2;
+
+        @media screen and (max-width: 1600px) {
+			column-count: 1;
+		}
 	}
 </style>
