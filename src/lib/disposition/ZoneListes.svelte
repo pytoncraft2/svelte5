@@ -6,7 +6,6 @@
     let afficheSansVoiture = $state(true);
     let afficheTrajetCoteACote = $state(false);
     let afficheParticipantEnHaut = $state(false);
-    // let afficheSansVoitureDisplay = $state(false);
     let mobile = $state(false);
     $effect(() => {
         mobile = estMobile()
@@ -18,15 +17,19 @@
     <div class="zoneListe" >
     <h2 id="{typeTrajet}" class="bar-text"><span>Trajet {typeTrajet}</span></h2>
     <div class="groupe-liste" 
-    style:--participant-en-haut={afficheSansVoiture &&
-    afficheTrajetCoteACote
-        ? "column"
-        : afficheParticipantEnHaut ? "column" : "row"}
+        style:--participant-en-haut={
+            afficheSansVoiture && afficheTrajetCoteACote && mobile ? "column"
+                : afficheParticipantEnHaut ? "column" : "row"}
     >
         <div class="zone-participant-sans-voiture"
-        style:--sans-voiture={afficheSansVoiture ? 'auto' : '540px'}
-        style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}>
-            <div class="liste">
+            style:--sans-voiture={afficheSansVoiture ? 'auto' : '540px'}
+            style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}>
+                <div class="liste" style:--columncount={
+                    (afficheSansVoiture && afficheTrajetCoteACote && !afficheParticipantEnHaut) && !mobile ? 1
+                    : (afficheSansVoiture && afficheTrajetCoteACote && afficheParticipantEnHaut) && !mobile ? 4
+                    : afficheParticipantEnHaut && !mobile ? 8 
+                    : 2}
+            >
                 <!-- liste sans voitures -->
                 {@render participants_sans_voiture(typeTrajet)}
             </div>
@@ -171,6 +174,18 @@
             width: 100%;
         }
     }
+
+	:global(.zone-participant-sans-voiture .liste) {
+		column-count: var(--columncount);
+
+        @media screen and (max-width: 1600px) {
+			column-count: 1;
+			.places {
+				overflow: auto;
+				max-height: 90vh;
+			}
+		}
+	}
 
     .zone-bouton-voitures {
         display: flex;

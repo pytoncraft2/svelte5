@@ -1,8 +1,13 @@
 <script>
+    import { estMobile }from "$lib/utils.js"
     let { afficheSansVoiture, afficheTrajetCoteACote, afficheParticipantEnHaut, opacity } = $props();
     function telechargement(e) {
         setTimeout(() => { window.print() }, 100);
     }
+    let mobile = $state(false);
+    $effect(() => {
+        mobile = estMobile()
+    })
 </script>
 <div class="liste-checkbox" style:opacity>
     <div class="checkboxs">
@@ -14,10 +19,12 @@
             <input type="checkbox" bind:checked={afficheTrajetCoteACote} />
             Trajets côte à côte
         </label>
+        {#if !afficheTrajetCoteACote || !mobile}
         <label>
             <input type="checkbox" bind:checked={afficheParticipantEnHaut} />
             Participant sans voiture en haut
         </label>
+        {/if}
         <button onclick={telechargement} class="bouton" style="border:none; display: inline-flex"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAS0lEQVR4nGNgGEngPxoetQAD/B8NIkLg/2gQoYNyLMGCC9cz0NCSenINJ8aSekoNx2cJ1QzHZgnVDYeBBigeBbQB/6mM6W8Bw5AEAO/6b2XgFcy5AAAAAElFTkSuQmCC" alt="telecharger">Télécharger</button>
     </div>
 </div>
@@ -49,15 +56,7 @@
 
 
 
-    #t {
-        display: flex;
-        gap: 1em;
-        justify-content: center;
-        flex-direction: var(--horizontale);
-        // @media screen and (max-width: 888px) {
-            // flex-direction: column;
-        // }
-    }
+
 
     // :global(#invisible-flex) {
     //     display: var(--invisible);
