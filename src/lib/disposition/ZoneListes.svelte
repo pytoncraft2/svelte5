@@ -1,11 +1,16 @@
 <script>
     import TelechargementEtCheckbox from "./TelechargementEtCheckbox.svelte";
+    import { estMobile}from "$lib/utils.js"
 
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets, opacity } = $props();
     let afficheSansVoiture = $state(true);
     let afficheTrajetCoteACote = $state(false);
     let afficheParticipantEnHaut = $state(false);
     // let afficheSansVoitureDisplay = $state(false);
+    let mobile = $state(false);
+    $effect(() => {
+        mobile = estMobile()
+    })
 </script>
 <TelechargementEtCheckbox bind:afficheSansVoiture bind:afficheTrajetCoteACote bind:afficheParticipantEnHaut {opacity}/>
 <div class="zoneListes" style:--trajet-cote-a-cote={afficheTrajetCoteACote ? 'row' : 'column'} style:opacity>
