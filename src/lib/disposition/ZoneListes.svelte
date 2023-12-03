@@ -91,21 +91,6 @@
         display: var(--sans-voiture-display);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     h2 {
         text-align: center;
     }
@@ -165,11 +150,8 @@
         position: -o-sticky;
         position: -ms-sticky;
         position: sticky;
-        position: sticky;
         top: 0;
         width: 100%;
-        // display: flex;
-        // justify-content: center;
         @media screen and (max-width: 480px) {
             width: 100%;
         }
@@ -226,9 +208,5 @@
             display: none;
         }        
     }
-
-    // .zoneListes {
-    //     max-width: 540px;
-    // }
 
 </style>

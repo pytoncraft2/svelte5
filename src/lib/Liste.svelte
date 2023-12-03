@@ -62,15 +62,4 @@
 	:global(.zone-participant-sans-voiture .places-occupees) {
 		background: #d20000;
 	}
-	// :global(.zone-participant-sans-voiture .liste) {
-	// 	column-count: 2;
-
-    //     // @media screen and (max-width: 1600px) {
-	// 	// 	column-count: 1;
-	// 	// 	.places {
-	// 	// 		overflow: auto;
-	// 	// 		max-height: 90vh;
-	// 	// 	}
-	// 	// }
-	// }
 </style>

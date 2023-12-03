@@ -1,13 +1,8 @@
 <script>
-    import { estMobile }from "$lib/utils.js"
     let { afficheSansVoiture, afficheTrajetCoteACote, afficheParticipantEnHaut, opacity } = $props();
     function telechargement(e) {
         setTimeout(() => { window.print() }, 100);
     }
-    let mobile = $state(false);
-    $effect(() => {
-        mobile = estMobile()
-    })
 </script>
 <div class="liste-checkbox" style:opacity>
     <div class="checkboxs">
@@ -19,12 +14,10 @@
             <input type="checkbox" bind:checked={afficheTrajetCoteACote} />
             Trajets côte à côte
         </label>
-        {#if !afficheTrajetCoteACote || !mobile}
         <label>
             <input type="checkbox" bind:checked={afficheParticipantEnHaut} />
             Participant sans voiture en haut
         </label>
-        {/if}
         <button onclick={telechargement} class="bouton" style="border:none; display: inline-flex"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAS0lEQVR4nGNgGEngPxoetQAD/B8NIkLg/2gQoYNyLMGCC9cz0NCSenINJ8aSekoNx2cJ1QzHZgnVDYeBBigeBbQB/6mM6W8Bw5AEAO/6b2XgFcy5AAAAAElFTkSuQmCC" alt="telecharger">Télécharger</button>
     </div>
 </div>
@@ -51,34 +44,4 @@
 
     }
 }
-
-
-
-
-
-
-
-    // :global(#invisible-flex) {
-    //     display: var(--invisible);
-    // }
-
-    // :global(.liste) {
-        // display: var(--liste) !important;
-        // width: auto !important;
-    // }
-
-    :global(.zoneListes) {
-        flex: 1 !important;
-        // max-width: none !important;
-    }
-
-    :global(.groupe-liste) {
-        flex-direction: var(--p-haut);
-    }
-
-    :global(.zone-participant-sans-voiture) {
-        max-width: var(--z-participant-sv);
-        display: var(--z-participant-display);
-    }
-
 </style>
