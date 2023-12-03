@@ -1,10 +1,10 @@
 <script>
-    let { afficheSansVoiture, afficheTrajetCoteACote, afficheParticipantEnHaut } = $props();
+    let { afficheSansVoiture, afficheTrajetCoteACote, afficheParticipantEnHaut, opacity } = $props();
     function telechargement(e) {
         setTimeout(() => { window.print() }, 100);
     }
 </script>
-<div class="liste-checkbox">
+<div class="liste-checkbox" style:opacity>
     <div class="checkboxs">
         <label>
         <input type="checkbox" bind:checked={afficheSansVoiture} />

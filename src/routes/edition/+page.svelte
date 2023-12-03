@@ -63,9 +63,14 @@
 		}
     }
 
+    let opacity = $state(0.5);
+    $effect(() => {
+        infos.loading ? (opacity = 0.5) : (opacity = 1);
+    })
+
 </script>
-<BandeauInfo {infos} --container-opacity={infos.loading ? 0.4 : 1} />
-<ZoneListes trajets={infos.trajets.split("/")}>
+<BandeauInfo {infos} {opacity} />
+<ZoneListes trajets={infos.trajets.split("/")} {opacity}>
     {#snippet participants_sans_voiture(typeTrajet)}
         <div>
             <TitreVoiture titre={`Participants sans voiture (${infos.participants.filter(

@@ -1,9 +1,9 @@
 <script>
 	// https://codesandbox.io/s/svelte-accordion-collapse-vhc3m?file=/Accordion.svelte
-	export let infos;
 	import { slide } from "svelte/transition";
+	let { infos, opacity } = $props();
 
-	let show = true;
+	let show = $state(true);
 	const showCollapse = (i) => {
 		show = !show;
 	};
@@ -14,7 +14,7 @@
   }
 </script>
 
-<div class="bandeau-container" style="opacity: var(--container-opacity)">
+<div class="bandeau-container" style:opacity>
 	<div class="bandeau">
 		<button
 			class="collapse__header"
