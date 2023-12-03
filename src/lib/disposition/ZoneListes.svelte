@@ -180,7 +180,7 @@
 
     .zone-voiture {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-wrap: wrap;
         gap: 1em;
         @media only screen and (max-width: 768px) {
