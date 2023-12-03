@@ -37,12 +37,12 @@
 		color: white;
 	}
 
-    @media screen and (max-width: 888px) {
-		.places {
-			overflow: auto;
-			max-height: 90vh;
-		}
-    }
+    // @media screen and (max-width: 888px) {
+		// .places {
+		// 	overflow: auto;
+		// 	max-height: 90vh;
+		// }
+    // }
 
 	.places-occupees {
 		display: inline-block;

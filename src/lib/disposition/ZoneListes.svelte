@@ -1,7 +1,6 @@
 <script>
     import TelechargementEtCheckbox from "./TelechargementEtCheckbox.svelte";
     import { estMobile}from "$lib/utils.js"
-
     let { participants_sans_voiture, participants_avec_voiture, bouton_ajout_voiture, trajets, opacity } = $props();
     let afficheSansVoiture = $state(true);
     let afficheTrajetCoteACote = $state(false);
@@ -23,7 +22,8 @@
     >
         <div class="zone-participant-sans-voiture"
             style:--sans-voiture={afficheSansVoiture ? 'auto' : '540px'}
-            style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}>
+            style:--sans-voiture-display={afficheSansVoiture ? 'block' : 'none'}
+            style:--overflow={(afficheTrajetCoteACote && !afficheParticipantEnHaut) || mobile ? 'auto' : 'visible'}>
                 <div class="liste" style:--columncount={
                     (afficheSansVoiture && afficheTrajetCoteACote && !afficheParticipantEnHaut) && !mobile ? 1
                     : (afficheSansVoiture && afficheTrajetCoteACote && afficheParticipantEnHaut) && !mobile ? 4
@@ -162,12 +162,23 @@
 
         @media screen and (max-width: 1600px) {
 			column-count: 1;
-			.places {
-				overflow: auto;
-				max-height: 90vh;
-			}
+			// .places {
+			// 	overflow: var(--overflow);
+			// 	max-height: 90vh;
+			// }
 		}
 	}
+
+    :global(.places) {
+            overflow: var(--overflow);
+            max-height: 90vh;
+    }
+	// :global(.zone-participant-sans-voiture .liste .places) {
+	// 		.places {
+	// 			overflow: var(--overflow);
+	// 			max-height: 90vh;
+	// 		}        
+    // }
 
     .zone-bouton-voitures {
         display: flex;
