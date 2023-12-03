@@ -56,6 +56,10 @@
         // }
     }
 
+    .zoneListe {
+        flex: 1;
+    }
+
     .invisible-flex {
         display: var(--sans-voiture-display);
     }

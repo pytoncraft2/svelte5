@@ -37,6 +37,13 @@
 		color: white;
 	}
 
+    @media screen and (max-width: 888px) {
+		.places {
+			overflow: auto;
+			max-height: 90vh;
+		}
+    }
+
 	.places-occupees {
 		display: inline-block;
 		width: 15px;
@@ -60,6 +67,10 @@
 
         @media screen and (max-width: 1600px) {
 			column-count: 1;
+			.places {
+				overflow: auto;
+				max-height: 90vh;
+			}
 		}
 	}
 </style>
